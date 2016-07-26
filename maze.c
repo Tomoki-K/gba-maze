@@ -1,7 +1,6 @@
+// color pallet : http://stackoverflow.com/questions/13720937/c-defined-16bit-high-color
 typedef volatile unsigned short hword;
 
-#define MRAM 0x04000000
-#define BRAM 0x04000130
 #define VRAM 0x06000000
 #define width  240
 #define height 160
@@ -9,31 +8,33 @@ typedef volatile unsigned short hword;
 #define block_size   8
 #define maze_width  30
 #define maze_height 20
-#define true  1
-#define false 0
-#define black  0x0000
 #define red    0x001F
 #define pink	 0xF81F
-#define blue   0x7C00
 #define orange 0x021F
+#define blue   0x7C00
+#define black  0x0000
 #define white  0x7FFF
 #define gray	 0xC618
-// color pallet : http://stackoverflow.com/questions/13720937/c-defined-16bit-high-color
+#define true  1
+#define false 0
 
 // define draw methods
-// void draw_ending();
-void draw_point(int, int, hword);
 void draw_dot(int, int, hword);
+void draw_point(int, int, hword);
 void draw_block(hword, hword, hword);
 void draw_portal(hword, hword, hword);
 void draw_heart(int, int);
 void draw_wall(hword);
 void draw_bg(hword);
+// void draw_title();
+// void draw_ending();
+
 // define move methods
 int moveRight(int, int);
 int moveLeft(int, int);
 int moveUp(int, int);
 int moveDown(int, int);
+
 // define other stuff :/
 void sleep(int);
 hword maze[20][30];
@@ -42,7 +43,7 @@ hword on_portal(hword, hword, hword, hword);
 
 // START HERE
 int main(void) {
-	hword *mode;
+	hword *ptr;
 	hword *btn_state;
 	hword start = 0x0008;
 	hword right = 0x0010;
@@ -57,35 +58,48 @@ int main(void) {
 	hword wall_color = black;
 	hword portal_in_color = blue;
 	hword portal_out_color =  orange;
-	int time;
+	int sleep_time;
 
+	ptr = (hword*) 0x04000000;
+	*ptr = 0xF03;
+
+	// player position
 	int X;
 	int Y;
 	int bufX;
 	int bufY;
 
-	mode = (hword*) MRAM;
-	*mode = 0xF03;
-
 	while(1) {
+		// draw_title();
+		while(1) {
+			btn_state = (hword*) 0x04000130;
+			// press start to start
+			if((*btn_state & start) == 0) {
+				break;
+			}
+		}
 
     // setup stage
 		draw_bg(bg_color);
 		draw_wall(wall_color);
-		X = 8; // starting player x
-		Y = 8; // starting player y
+		// player starting position
+		X = 8;
+		Y = 8;
 
 		while(1) {
-			btn_state = (hword*) BRAM;
+			btn_state = (hword*) 0x04000130;
 			bufX = X;
 			bufY = Y;
-			time = 10000;
+			sleep_time = 10000; // speed (larger->slower)
 
+			// alter speed
+			/*
 			if((*btn_state & r_key) == 0) {
-				time = 5000;
-			} else if((*btn_state & l_key) == 0) {
-				time = 20000;
+			 	sleep_time = 5000;
+			 } else if((*btn_state & l_key) == 0) {
+			 	sleep_time = 20000;
 			}
+			*/
 
 			// key control
 			if((*btn_state & right) == 0) {
@@ -102,21 +116,21 @@ int main(void) {
 			}
 
       // portals : draw_block(x,  y, color);
-			draw_portal( 5,  1, portal_in_color); // 1 in
-			draw_portal( 1,  3, portal_out_color); // 1 out
-			draw_portal( 9,  2, portal_in_color); // 2 in
-			draw_portal( 1, 18, portal_out_color); // 2 out
-			draw_portal( 6, 18, portal_in_color); // 3 in
-			draw_portal(28,  1, portal_out_color); // 3 out
-			draw_portal(18, 14, portal_in_color); // 4 in
-			draw_portal(16, 18, portal_out_color); // 4 out
-			draw_portal( 7, 16, portal_in_color); // 5 in
-			draw_portal( 9, 10, portal_out_color); // 5 out
-			draw_portal( 9,  4, portal_in_color); // 6 in
-			draw_portal(18, 10, portal_out_color); // 6 out
-			draw_portal(19,  7, portal_in_color); // 7 in
-			draw_portal(28, 14, portal_out_color); // 7 out
-			draw_heart(28, 18); //goal
+			draw_portal( 5,  1, portal_in_color);		// 1 in
+			draw_portal( 1,  3, portal_out_color);	// 1 out
+			draw_portal( 9,  2, portal_in_color);		// 2 in
+			draw_portal( 1, 18, portal_out_color);	// 2 out
+			draw_portal( 6, 18, portal_in_color);		// 3 in
+			draw_portal(28,  1, portal_out_color);	// 3 out
+			draw_portal(18, 14, portal_in_color);		// 4 in
+			draw_portal(16, 18, portal_out_color);	// 4 out
+			draw_portal( 7, 16, portal_in_color);		// 5 in
+			draw_portal( 9, 10, portal_out_color);	// 5 out
+			draw_portal( 9,  4, portal_in_color);		// 6 in
+			draw_portal(18, 10, portal_out_color);	// 6 out
+			draw_portal(19,  7, portal_in_color);		// 7 in
+			draw_portal(28, 14, portal_out_color);	// 7 out
+			draw_heart(28, 18);											//goal
 
       // portal warp points
 			if(on_portal(X, Y,  5,  1) == true) { // 1
@@ -156,11 +170,12 @@ int main(void) {
 				// draw_ending();
 				break;
 			}
-			sleep(time);
+			sleep(sleep_time);
 		}
 
 		while(1) {
-			btn_state = (hword*) BRAM;
+			btn_state = (hword*) 0x04000130;
+			// press start to play again
 			if((*btn_state & start) == 0) {
 				break;
 			}
@@ -169,11 +184,11 @@ int main(void) {
 	return 0;
 }
 
-
+//check if player is on a portal
 hword on_portal(hword x, hword y, hword xblock, hword yblock) {
-	hword CheckX = xblock * block_size;
-	hword CheckY = yblock * block_size;
-	if(CheckX <= x && CheckY <= y && x < CheckX + block_size - player_size + 1 && y < CheckY + block_size - player_size + 1) {
+	hword checkX = xblock * block_size;
+	hword checkY = yblock * block_size;
+	if(checkX<=x && checkY<=y && x<checkX + block_size-player_size+1 && y<checkY+block_size-player_size+1) {
 		return true;
 	} else {
 		return false;
@@ -182,76 +197,81 @@ hword on_portal(hword x, hword y, hword xblock, hword yblock) {
 
 
 /* ======== move methods ======== */
+
+// move player towards right
 int moveRight(int x, int y) {
 	hword *ptr;
-	hword flag = false;
+	hword isWall = false;
 	int i;
 	ptr = (hword*) VRAM + x + player_size + y * width;
 	for(i = 0; i < player_size; i++) {
-		if(*ptr == black) {
-			flag = true;
+		if(*ptr == black) { // black => it's a wall!!
+			isWall = true;
 			break;
 		}
 		ptr += width;
 	}
-	if(flag == false) {
-		return ++x;
+	if(isWall == false) {
+		return ++x; // move 1 point to right
 	} else {
-		return x;
+		return x; // do nothing
 	}
 }
 
+// move player towards left
 int moveLeft(int x, int y) {
 	hword *ptr;
-	hword flag = false;
+	hword isWall = false;
 	int i;
 	ptr = (hword*) VRAM + x - 1 + y * width;
 	for(i = 0; i < player_size; i++) {
 		if(*ptr == black) {
-			flag = true;
+			isWall = true;
 			break;
 		}
 		ptr += width;
 	}
-	if(flag == false) {
+	if(isWall == false) {
 		return --x;
 	} else {
 		return x;
 	}
 }
 
+// move player upwards
 int moveUp(int x, int y) {
 	hword *ptr;
-	hword flag = false;
+	hword isWall = false;
 	int i;
 	ptr = (hword*) VRAM + x + (y - 1) * width;
 	for(i = 0; i < player_size; i++) {
 		if(*ptr == black) {
-			flag = true;
+			isWall = true;
 			break;
 		}
 		ptr++;
 	}
-	if(flag == false) {
+	if(isWall == false) {
 		return --y;
 	} else {
 		return y;
 	}
 }
 
+// move player downwards
 int moveDown(int x, int y) {
 	hword *ptr;
-	hword flag = false;
+	hword isWall = false;
 	int i;
 	ptr = (hword*) VRAM + x + (y + player_size) * width;
 	for(i = 0; i < player_size; i++) {
 		if(*ptr == black) {
-			flag = true;
+			isWall = true;
 			break;
 		}
 		ptr++;
 	}
-	if(flag == false) {
+	if(isWall == false) {
 		return ++y;
 	} else {
 		return y;
@@ -259,6 +279,99 @@ int moveDown(int x, int y) {
 }
 
 /* ======== draw methods ======== */
+
+// draw 1x1 pixel "dot"
+void draw_dot(int x, int y, hword color) {
+	hword *ptr;
+	ptr = (hword*) VRAM + x + y * 240;
+	*ptr = color;
+}
+
+// draw 2x2 pixel "point"
+void draw_point(int x, int y, hword color) {
+	hword *ptr;
+	int ptrX = x;
+	int ptrY = y;
+	ptr = (hword*) VRAM + ptrX + ptrY * width;
+	for(ptrY = 0; ptrY < player_size; ptrY++) {
+		for(ptrX = 0; ptrX < player_size; ptrX++) {
+			*ptr = color;
+			ptr++;
+		}
+		ptr = ptr + width - player_size;
+	}
+}
+
+// draw 8x8 pixel "block"
+void draw_block(hword x, hword y, hword color) {
+	hword *ptr;
+	int i, j;
+	ptr = (hword*) VRAM + x * block_size + y * block_size * width;
+	for(j = 0; j < block_size; j++) {
+		for(i = 0; i < block_size; i++) {
+			*ptr = color;
+			ptr++;
+		}
+		ptr = ptr + width - block_size;
+	}
+}
+
+// draw 8x8 portal
+void draw_portal(hword x, hword y, hword color) {
+	hword *ptr;
+	int i, j;
+	ptr = (hword*) VRAM + x * block_size + y * block_size * width;
+	for(j = 0; j < block_size; j++) {
+		for(i = 0; i < block_size; i++) {
+			if (i == 0 || i == 1 || i == 6 || i == 7 || j == 0 || j == 1 || j == 6 || j == 7) {
+				*ptr = color;
+			}
+			ptr++;
+		}
+		ptr = ptr + width - block_size;
+	}
+}
+
+// draw heart box at goalpoint
+void draw_heart(int x, int y) {
+	hword PtrX = x * block_size;
+ 	hword ptrY = y * block_size;
+	draw_block(x, y, gray);
+	draw_dot(PtrX+1, ptrY+1, pink);
+	draw_dot(PtrX+2, ptrY+1, pink);
+	draw_dot(PtrX+5, ptrY+1, pink);
+	draw_dot(PtrX+6, ptrY+1, pink);
+	draw_dot(PtrX+0, ptrY+2, pink);
+	draw_dot(PtrX+1, ptrY+2, pink);
+	draw_dot(PtrX+2, ptrY+2, pink);
+	draw_dot(PtrX+3, ptrY+2, pink);
+	draw_dot(PtrX+4, ptrY+2, pink);
+	draw_dot(PtrX+5, ptrY+2, pink);
+	draw_dot(PtrX+6, ptrY+2, pink);
+	draw_dot(PtrX+7, ptrY+2, pink);
+	draw_dot(PtrX+0, ptrY+3, pink);
+	draw_dot(PtrX+1, ptrY+3, pink);
+	draw_dot(PtrX+2, ptrY+3, pink);
+	draw_dot(PtrX+3, ptrY+3, pink);
+	draw_dot(PtrX+4, ptrY+3, pink);
+	draw_dot(PtrX+5, ptrY+3, pink);
+	draw_dot(PtrX+6, ptrY+3, pink);
+	draw_dot(PtrX+7, ptrY+3, pink);
+	draw_dot(PtrX+1, ptrY+4, pink);
+	draw_dot(PtrX+2, ptrY+4, pink);
+	draw_dot(PtrX+3, ptrY+4, pink);
+	draw_dot(PtrX+4, ptrY+4, pink);
+	draw_dot(PtrX+5, ptrY+4, pink);
+	draw_dot(PtrX+6, ptrY+4, pink);
+	draw_dot(PtrX+2, ptrY+5, pink);
+	draw_dot(PtrX+3, ptrY+5, pink);
+	draw_dot(PtrX+4, ptrY+5, pink);
+	draw_dot(PtrX+5, ptrY+5, pink);
+	draw_dot(PtrX+3, ptrY+6, pink);
+	draw_dot(PtrX+4, ptrY+6, pink);
+}
+
+// draw maze walls
 void draw_wall(hword color) {
 	int i, j;
 
@@ -873,6 +986,7 @@ void draw_wall(hword color) {
 	}
 }
 
+// draw background
 void draw_bg(hword color) {
 	hword *ptr;
 	int i;
@@ -883,93 +997,17 @@ void draw_bg(hword color) {
 	}
 }
 
-void draw_block(hword x, hword y, hword color) {
-	hword *ptr;
-	int i, j;
-	ptr = (hword*) VRAM + x * block_size + y * block_size * width;
-	for(j = 0; j < block_size; j++) {
-		for(i = 0; i < block_size; i++) {
-			*ptr = color;
-			ptr++;
-		}
-		ptr = ptr + width - block_size;
-	}
+/*
+// draw title screen
+void draw_title() {
 }
 
-void draw_portal(hword x, hword y, hword color) {
-	hword *ptr;
-	int i, j;
-	ptr = (hword*) VRAM + x * block_size + y * block_size * width;
-	for(j = 0; j < block_size; j++) {
-		for(i = 0; i < block_size; i++) {
-			if (i == 0 || i == 1 || i == 6 || i == 7 || j == 0 || j == 1 || j == 6 || j == 7) {
-				*ptr = color;
-			}
-			ptr++;
-		}
-		ptr = ptr + width - block_size;
-	}
+// draw ending screen
+void draw_ending() {
 }
+*/
 
-void draw_point(int x, int y, hword color) {
-	hword *ptr;
-	int ptrX = x;
-	int ptrY = y;
-	ptr = (hword*) VRAM + ptrX + ptrY * width;
-	for(ptrY = 0; ptrY < player_size; ptrY++) {
-		for(ptrX = 0; ptrX < player_size; ptrX++) {
-			*ptr = color;
-			ptr++;
-		}
-		ptr = ptr + width - player_size;
-	}
-}
-
-void draw_dot(int x, int y, hword color) {
-	hword *ptr;
-	ptr = (hword*) VRAM + x + y * 240;
-	*ptr = color;
-}
-
-void draw_heart(int x, int y) {
-	hword PtrX = x * block_size;
- 	hword ptrY = y * block_size;
-	draw_block(x, y, gray);
-	draw_dot(PtrX+1, ptrY+1, pink);
-	draw_dot(PtrX+2, ptrY+1, pink);
-	draw_dot(PtrX+5, ptrY+1, pink);
-	draw_dot(PtrX+6, ptrY+1, pink);
-	draw_dot(PtrX+0, ptrY+2, pink);
-	draw_dot(PtrX+1, ptrY+2, pink);
-	draw_dot(PtrX+2, ptrY+2, pink);
-	draw_dot(PtrX+3, ptrY+2, pink);
-	draw_dot(PtrX+4, ptrY+2, pink);
-	draw_dot(PtrX+5, ptrY+2, pink);
-	draw_dot(PtrX+6, ptrY+2, pink);
-	draw_dot(PtrX+7, ptrY+2, pink);
-	draw_dot(PtrX+0, ptrY+3, pink);
-	draw_dot(PtrX+1, ptrY+3, pink);
-	draw_dot(PtrX+2, ptrY+3, pink);
-	draw_dot(PtrX+3, ptrY+3, pink);
-	draw_dot(PtrX+4, ptrY+3, pink);
-	draw_dot(PtrX+5, ptrY+3, pink);
-	draw_dot(PtrX+6, ptrY+3, pink);
-	draw_dot(PtrX+7, ptrY+3, pink);
-	draw_dot(PtrX+1, ptrY+4, pink);
-	draw_dot(PtrX+2, ptrY+4, pink);
-	draw_dot(PtrX+3, ptrY+4, pink);
-	draw_dot(PtrX+4, ptrY+4, pink);
-	draw_dot(PtrX+5, ptrY+4, pink);
-	draw_dot(PtrX+6, ptrY+4, pink);
-	draw_dot(PtrX+2, ptrY+5, pink);
-	draw_dot(PtrX+3, ptrY+5, pink);
-	draw_dot(PtrX+4, ptrY+5, pink);
-	draw_dot(PtrX+5, ptrY+5, pink);
-	draw_dot(PtrX+3, ptrY+6, pink);
-	draw_dot(PtrX+4, ptrY+6, pink);
-}
-
-void sleep(int time) {
+void sleep(int sleep_time) {
 	int i;
-	for(i = 0; i < time; i++);
+	for(i = 0; i < sleep_time; i++);
 }
