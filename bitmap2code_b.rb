@@ -4,8 +4,8 @@ File.open('block_bitmap.txt') do |file|
   by = 19 # block y
   i = 0
 
-  print("hword startX = x*block_size-(block_size-1);\n")
-  print("hword startY = y+block_size-(block_size-1);\n\n")
+  print("hword ptrX = x * block_size;\n")
+  print("hword ptrY = y * block_size;\n")
   str.each_char do |char|
     px = i % 8
     py = i / 8
@@ -13,10 +13,10 @@ File.open('block_bitmap.txt') do |file|
     if str == 1.to_s then
       color = "pink"
     else
-      color = "bg_color"
+      color = "gray"
     end
 
-    print("draw_point(startX+" + px.to_s + ", startY+" + py.to_s + ", " + color + ");\n")
+    print("draw_point(ptrX+" + px.to_s + ", ptrY+" + py.to_s + ", " + color + ");\n")
     i += 1
 
   end
