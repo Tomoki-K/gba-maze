@@ -47,9 +47,9 @@ main:
 	mov	r3, #67108864
 	str	r3, [fp, #-20]
 	ldr	r3, [fp, #-20]
-	ldr	r2, .L19
+	ldr	r2, .L21
 	strh	r2, [r3]	@ movhi
-.L18:
+.L20:
 	ldrh	r3, [fp, #-48]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
@@ -64,14 +64,14 @@ main:
 	str	r3, [fp, #-12]
 	mov	r3, #8
 	str	r3, [fp, #-16]
-.L15:
-	ldr	r3, .L19+4
+.L17:
+	ldr	r3, .L21+4
 	str	r3, [fp, #-24]
 	ldr	r3, [fp, #-12]
 	str	r3, [fp, #-28]
 	ldr	r3, [fp, #-16]
 	str	r3, [fp, #-32]
-	ldr	r3, .L19+8
+	ldr	r3, .L21+8
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-24]
 	ldrh	r3, [r3]	@ movhi
@@ -85,7 +85,7 @@ main:
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
 	bne	.L2
-	ldr	r3, .L19+12
+	ldr	r3, .L21+12
 	str	r3, [fp, #-8]
 	b	.L3
 .L2:
@@ -101,7 +101,7 @@ main:
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
 	bne	.L3
-	ldr	r3, .L19+16
+	ldr	r3, .L21+16
 	str	r3, [fp, #-8]
 .L3:
 	ldr	r3, [fp, #-24]
@@ -133,12 +133,13 @@ main:
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
-	bne	.L5
+	bne	.L6
 	ldr	r0, [fp, #-12]
 	ldr	r1, [fp, #-16]
 	bl	moveLeft
 	str	r0, [fp, #-12]
-.L5:
+	b	.L5
+.L6:
 	ldr	r3, [fp, #-24]
 	ldrh	r3, [r3]	@ movhi
 	mov	r3, r3, asl #16
@@ -150,13 +151,13 @@ main:
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
-	bne	.L6
+	bne	.L7
 	ldr	r0, [fp, #-12]
 	ldr	r1, [fp, #-16]
 	bl	moveUp
 	str	r0, [fp, #-16]
-	b	.L7
-.L6:
+	b	.L5
+.L7:
 	ldr	r3, [fp, #-24]
 	ldrh	r3, [r3]	@ movhi
 	mov	r3, r3, asl #16
@@ -168,49 +169,112 @@ main:
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
-	bne	.L7
+	bne	.L5
 	ldr	r0, [fp, #-12]
 	ldr	r1, [fp, #-16]
 	bl	moveDown
 	str	r0, [fp, #-16]
-.L7:
+.L5:
 	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
-	mov	r0, #28
-	mov	r1, #3
-	mov	r2, r3
-	bl	bg_cell
-	ldrh	r3, [fp, #-54]	@ movhi
-	mov	r3, r3, asl #16
-	mov	r3, r3, lsr #16
-	mov	r0, #17
-	mov	r1, #4
+	mov	r0, #5
+	mov	r1, #1
 	mov	r2, r3
 	bl	bg_cell
 	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #1
-	mov	r1, #5
+	mov	r1, #3
+	mov	r2, r3
+	bl	bg_cell
+	ldrh	r3, [fp, #-54]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r0, #9
+	mov	r1, #2
+	mov	r2, r3
+	bl	bg_cell
+	ldrh	r3, [fp, #-54]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r0, #1
+	mov	r1, #18
+	mov	r2, r3
+	bl	bg_cell
+	ldrh	r3, [fp, #-54]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r0, #6
+	mov	r1, #18
+	mov	r2, r3
+	bl	bg_cell
+	ldrh	r3, [fp, #-54]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r0, #28
+	mov	r1, #1
+	mov	r2, r3
+	bl	bg_cell
+	ldrh	r3, [fp, #-54]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r0, #18
+	mov	r1, #14
+	mov	r2, r3
+	bl	bg_cell
+	ldrh	r3, [fp, #-54]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r0, #16
+	mov	r1, #18
 	mov	r2, r3
 	bl	bg_cell
 	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #7
-	mov	r1, #11
+	mov	r1, #16
 	mov	r2, r3
 	bl	bg_cell
 	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
-	mov	r0, #5
-	mov	r1, #16
+	mov	r0, #9
+	mov	r1, #10
 	mov	r2, r3
 	bl	bg_cell
-	mov	r0, #15
+	ldrh	r3, [fp, #-54]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r0, #9
+	mov	r1, #4
+	mov	r2, r3
+	bl	bg_cell
+	ldrh	r3, [fp, #-54]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r0, #18
 	mov	r1, #10
+	mov	r2, r3
+	bl	bg_cell
+	ldrh	r3, [fp, #-54]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r0, #19
+	mov	r1, #7
+	mov	r2, r3
+	bl	bg_cell
+	ldrh	r3, [fp, #-54]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r0, #28
+	mov	r1, #14
+	mov	r2, r3
+	bl	bg_cell
+	mov	r0, #28
+	mov	r1, #18
 	mov	r2, #31
 	bl	bg_cell
 	ldr	r3, [fp, #-12]
@@ -221,19 +285,16 @@ main:
 	mov	r3, r3, lsr #16
 	mov	r0, r2
 	mov	r1, r3
-	mov	r2, #28
-	mov	r3, #3
-	bl	portal
+	mov	r2, #5
+	mov	r3, #1
+	bl	on_portal
 	mov	r3, r0
 	cmp	r3, #1
 	bne	.L8
-	ldrh	r3, [fp, #-48]	@ movhi
-	mov	r3, r3, asl #16
-	mov	r3, r3, lsr #16
-	mov	r0, #21
-	mov	r1, #14
-	mov	r2, r3
-	bl	bg_cell
+	mov	r3, #8
+	str	r3, [fp, #-12]
+	mov	r3, #24
+	str	r3, [fp, #-16]
 .L8:
 	ldr	r3, [fp, #-12]
 	mov	r3, r3, asl #16
@@ -243,19 +304,16 @@ main:
 	mov	r3, r3, lsr #16
 	mov	r0, r2
 	mov	r1, r3
-	mov	r2, #17
-	mov	r3, #4
-	bl	portal
+	mov	r2, #9
+	mov	r3, #2
+	bl	on_portal
 	mov	r3, r0
 	cmp	r3, #1
 	bne	.L9
-	ldrh	r3, [fp, #-48]	@ movhi
-	mov	r3, r3, asl #16
-	mov	r3, r3, lsr #16
-	mov	r0, #18
-	mov	r1, #6
-	mov	r2, r3
-	bl	bg_cell
+	mov	r3, #8
+	str	r3, [fp, #-12]
+	mov	r3, #144
+	str	r3, [fp, #-16]
 .L9:
 	ldr	r3, [fp, #-12]
 	mov	r3, r3, asl #16
@@ -265,19 +323,16 @@ main:
 	mov	r3, r3, lsr #16
 	mov	r0, r2
 	mov	r1, r3
-	mov	r2, #1
-	mov	r3, #5
-	bl	portal
+	mov	r2, #6
+	mov	r3, #18
+	bl	on_portal
 	mov	r3, r0
 	cmp	r3, #1
 	bne	.L10
-	ldrh	r3, [fp, #-48]	@ movhi
-	mov	r3, r3, asl #16
-	mov	r3, r3, lsr #16
-	mov	r0, #14
-	mov	r1, #10
-	mov	r2, r3
-	bl	bg_cell
+	mov	r3, #224
+	str	r3, [fp, #-12]
+	mov	r3, #8
+	str	r3, [fp, #-16]
 .L10:
 	ldr	r3, [fp, #-12]
 	mov	r3, r3, asl #16
@@ -287,19 +342,16 @@ main:
 	mov	r3, r3, lsr #16
 	mov	r0, r2
 	mov	r1, r3
-	mov	r2, #7
-	mov	r3, #11
-	bl	portal
+	mov	r2, #18
+	mov	r3, #14
+	bl	on_portal
 	mov	r3, r0
 	cmp	r3, #1
 	bne	.L11
-	ldrh	r3, [fp, #-48]	@ movhi
-	mov	r3, r3, asl #16
-	mov	r3, r3, lsr #16
-	mov	r0, #1
-	mov	r1, #15
-	mov	r2, r3
-	bl	bg_cell
+	mov	r3, #128
+	str	r3, [fp, #-12]
+	mov	r3, #144
+	str	r3, [fp, #-16]
 .L11:
 	ldr	r3, [fp, #-12]
 	mov	r3, r3, asl #16
@@ -309,20 +361,55 @@ main:
 	mov	r3, r3, lsr #16
 	mov	r0, r2
 	mov	r1, r3
-	mov	r2, #5
+	mov	r2, #7
 	mov	r3, #16
-	bl	portal
+	bl	on_portal
 	mov	r3, r0
 	cmp	r3, #1
 	bne	.L12
-	ldrh	r3, [fp, #-48]	@ movhi
+	mov	r3, #72
+	str	r3, [fp, #-12]
+	mov	r3, #80
+	str	r3, [fp, #-16]
+.L12:
+	ldr	r3, [fp, #-12]
+	mov	r3, r3, asl #16
+	mov	r2, r3, lsr #16
+	ldr	r3, [fp, #-16]
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
-	mov	r0, #11
-	mov	r1, #17
-	mov	r2, r3
-	bl	bg_cell
-.L12:
+	mov	r0, r2
+	mov	r1, r3
+	mov	r2, #9
+	mov	r3, #4
+	bl	on_portal
+	mov	r3, r0
+	cmp	r3, #1
+	bne	.L13
+	mov	r3, #144
+	str	r3, [fp, #-12]
+	mov	r3, #80
+	str	r3, [fp, #-16]
+.L13:
+	ldr	r3, [fp, #-12]
+	mov	r3, r3, asl #16
+	mov	r2, r3, lsr #16
+	ldr	r3, [fp, #-16]
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r0, r2
+	mov	r1, r3
+	mov	r2, #19
+	mov	r3, #7
+	bl	on_portal
+	mov	r3, r0
+	cmp	r3, #1
+	bne	.L14
+	mov	r3, #224
+	str	r3, [fp, #-12]
+	mov	r3, #112
+	str	r3, [fp, #-16]
+.L14:
 	ldrh	r3, [fp, #-48]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
@@ -345,26 +432,26 @@ main:
 	mov	r3, r3, lsr #16
 	mov	r0, r2
 	mov	r1, r3
-	mov	r2, #15
-	mov	r3, #10
-	bl	portal
+	mov	r2, #28
+	mov	r3, #18
+	bl	on_portal
 	mov	r3, r0
 	cmp	r3, #1
-	bne	.L13
-	ldr	r0, .L19+20
+	bne	.L15
+	ldr	r0, .L21+20
 	bl	sleep
 	ldrh	r3, [fp, #-48]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, r3
 	bl	draw_bg
-	b	.L14
-.L13:
+	b	.L16
+.L15:
 	ldr	r0, [fp, #-8]
 	bl	sleep
-	b	.L15
-.L14:
-	ldr	r3, .L19+4
+	b	.L17
+.L16:
+	ldr	r3, .L21+4
 	str	r3, [fp, #-24]
 	ldr	r3, [fp, #-24]
 	ldrh	r3, [r3]	@ movhi
@@ -377,14 +464,14 @@ main:
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
-	bne	.L16
+	bne	.L18
 	mov	r0, r0	@ nop
-	b	.L18
-.L16:
-	b	.L14
-.L20:
+	b	.L20
+.L18:
+	b	.L16
+.L22:
 	.align	2
-.L19:
+.L21:
 	.word	3843
 	.word	67109168
 	.word	10000
@@ -393,9 +480,9 @@ main:
 	.word	100000
 	.size	main, .-main
 	.align	2
-	.global	portal
-	.type	portal, %function
-portal:
+	.global	on_portal
+	.type	on_portal, %function
+on_portal:
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 16
 	@ frame_needed = 1, uses_anonymous_args = 0
@@ -428,7 +515,7 @@ portal:
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r2, r3
-	bhi	.L22
+	bhi	.L24
 	ldrh	r3, [fp, #-8]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r2, r3, lsr #16
@@ -436,7 +523,7 @@ portal:
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r2, r3
-	bhi	.L22
+	bhi	.L24
 	ldrh	r3, [fp, #-14]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
@@ -446,7 +533,7 @@ portal:
 	mov	r3, r3, lsr #16
 	add	r3, r3, #5
 	cmp	r2, r3
-	bge	.L22
+	bge	.L24
 	ldrh	r3, [fp, #-16]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
@@ -456,18 +543,18 @@ portal:
 	mov	r3, r3, lsr #16
 	add	r3, r3, #5
 	cmp	r2, r3
-	bge	.L22
+	bge	.L24
 	mov	r3, #1
-	b	.L23
-.L22:
+	b	.L25
+.L24:
 	mov	r3, #0
-.L23:
+.L25:
 	mov	r0, r3
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
 	bx	lr
-	.size	portal, .-portal
+	.size	on_portal, .-on_portal
 	.align	2
 	.global	moveRight
 	.type	moveRight, %function
@@ -497,42 +584,42 @@ moveRight:
 	str	r3, [fp, #-8]
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L25
-.L28:
+	b	.L27
+.L30:
 	ldr	r3, [fp, #-8]
 	ldrh	r3, [r3]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
-	bne	.L26
+	bne	.L28
 	mov	r3, #1
 	strh	r3, [fp, #-14]	@ movhi
-	b	.L27
-.L26:
+	b	.L29
+.L28:
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #480
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L25:
+.L27:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #3
-	ble	.L28
-.L27:
+	ble	.L30
+.L29:
 	ldrh	r3, [fp, #-14]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
-	bne	.L29
+	bne	.L31
 	ldr	r3, [fp, #-24]
 	add	r3, r3, #1
 	str	r3, [fp, #-24]
 	ldr	r3, [fp, #-24]
-	b	.L30
-.L29:
+	b	.L32
+.L31:
 	ldr	r3, [fp, #-24]
-.L30:
+.L32:
 	mov	r0, r3
 	sub	sp, fp, #0
 	@ sp needed
@@ -568,42 +655,42 @@ moveLeft:
 	str	r3, [fp, #-8]
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L32
-.L35:
+	b	.L34
+.L37:
 	ldr	r3, [fp, #-8]
 	ldrh	r3, [r3]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
-	bne	.L33
+	bne	.L35
 	mov	r3, #1
 	strh	r3, [fp, #-14]	@ movhi
-	b	.L34
-.L33:
+	b	.L36
+.L35:
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #480
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L32:
+.L34:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #3
-	ble	.L35
-.L34:
+	ble	.L37
+.L36:
 	ldrh	r3, [fp, #-14]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
-	bne	.L36
+	bne	.L38
 	ldr	r3, [fp, #-24]
 	sub	r3, r3, #1
 	str	r3, [fp, #-24]
 	ldr	r3, [fp, #-24]
-	b	.L37
-.L36:
+	b	.L39
+.L38:
 	ldr	r3, [fp, #-24]
-.L37:
+.L39:
 	mov	r0, r3
 	sub	sp, fp, #0
 	@ sp needed
@@ -639,42 +726,42 @@ moveUp:
 	str	r3, [fp, #-8]
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L39
-.L42:
+	b	.L41
+.L44:
 	ldr	r3, [fp, #-8]
 	ldrh	r3, [r3]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
-	bne	.L40
+	bne	.L42
 	mov	r3, #1
 	strh	r3, [fp, #-14]	@ movhi
-	b	.L41
-.L40:
+	b	.L43
+.L42:
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #2
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L39:
+.L41:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #3
-	ble	.L42
-.L41:
+	ble	.L44
+.L43:
 	ldrh	r3, [fp, #-14]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
-	bne	.L43
+	bne	.L45
 	ldr	r3, [fp, #-28]
 	sub	r3, r3, #1
 	str	r3, [fp, #-28]
 	ldr	r3, [fp, #-28]
-	b	.L44
-.L43:
+	b	.L46
+.L45:
 	ldr	r3, [fp, #-28]
-.L44:
+.L46:
 	mov	r0, r3
 	sub	sp, fp, #0
 	@ sp needed
@@ -710,42 +797,42 @@ moveDown:
 	str	r3, [fp, #-8]
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L46
-.L49:
+	b	.L48
+.L51:
 	ldr	r3, [fp, #-8]
 	ldrh	r3, [r3]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
-	bne	.L47
+	bne	.L49
 	mov	r3, #1
 	strh	r3, [fp, #-14]	@ movhi
-	b	.L48
-.L47:
+	b	.L50
+.L49:
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #2
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L46:
+.L48:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #3
-	ble	.L49
-.L48:
+	ble	.L51
+.L50:
 	ldrh	r3, [fp, #-14]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
-	bne	.L50
+	bne	.L52
 	ldr	r3, [fp, #-28]
 	add	r3, r3, #1
 	str	r3, [fp, #-28]
 	ldr	r3, [fp, #-28]
-	b	.L51
-.L50:
+	b	.L53
+.L52:
 	ldr	r3, [fp, #-28]
-.L51:
+.L53:
 	mov	r0, r3
 	sub	sp, fp, #0
 	@ sp needed
@@ -764,1033 +851,1033 @@ draw_wall:
 	sub	sp, sp, #16
 	mov	r3, r0
 	strh	r3, [fp, #-14]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #2]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #4]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #6]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #8]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #10]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #12]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #14]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #16]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #18]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #20]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #22]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #24]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #26]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #28]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #30]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #32]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #34]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #36]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #38]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #40]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #42]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #44]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #46]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #48]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #50]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #52]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #54]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #56]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #58]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #60]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #62]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #64]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #66]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #68]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #70]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #72]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #74]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #76]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #78]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #80]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #82]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #84]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #86]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #88]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #90]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #92]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #94]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #96]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #98]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #100]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #102]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #104]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #106]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #108]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #110]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #112]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #114]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #116]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #118]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #120]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #122]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #124]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #126]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #128]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #130]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #132]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #134]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #136]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #138]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #140]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #142]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #144]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #146]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #148]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #150]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #152]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #154]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #156]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #158]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #160]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #162]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #164]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #166]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #168]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #170]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #172]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #174]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #176]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #178]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #180]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #182]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #184]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #186]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #188]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #190]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #192]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #194]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #196]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #198]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #200]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #202]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #204]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #206]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #208]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #210]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #212]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #214]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #216]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #218]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #220]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #222]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #224]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #226]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #228]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #230]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #232]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #234]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #236]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #238]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #240]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #242]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #244]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #246]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #248]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #250]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #1
 	strh	r2, [r3, #252]	@ movhi
-	ldr	r3, .L58
+	ldr	r3, .L60
 	mov	r2, #0
 	strh	r2, [r3, #254]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #256
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+4
+	ldr	r2, .L60
+	ldr	r3, .L60+4
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #260
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+8
+	ldr	r2, .L60
+	ldr	r3, .L60+8
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #264
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+12
+	ldr	r2, .L60
+	ldr	r3, .L60+12
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #268
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+16
+	ldr	r2, .L60
+	ldr	r3, .L60+16
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #272
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+20
+	ldr	r2, .L60
+	ldr	r3, .L60+20
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #276
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+24
+	ldr	r2, .L60
+	ldr	r3, .L60+24
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #280
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+28
+	ldr	r2, .L60
+	ldr	r3, .L60+28
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #284
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+32
+	ldr	r2, .L60
+	ldr	r3, .L60+32
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #288
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+36
+	ldr	r2, .L60
+	ldr	r3, .L60+36
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #292
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+40
+	ldr	r2, .L60
+	ldr	r3, .L60+40
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #296
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+44
+	ldr	r2, .L60
+	ldr	r3, .L60+44
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #300
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+48
+	ldr	r2, .L60
+	ldr	r3, .L60+48
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #304
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+52
+	ldr	r2, .L60
+	ldr	r3, .L60+52
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #308
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+56
+	ldr	r2, .L60
+	ldr	r3, .L60+56
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #312
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+60
+	ldr	r2, .L60
+	ldr	r3, .L60+60
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #316
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+64
+	ldr	r2, .L60
+	ldr	r3, .L60+64
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #320
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+68
+	ldr	r2, .L60
+	ldr	r3, .L60+68
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #324
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+72
+	ldr	r2, .L60
+	ldr	r3, .L60+72
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #328
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+76
+	ldr	r2, .L60
+	ldr	r3, .L60+76
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #332
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+80
+	ldr	r2, .L60
+	ldr	r3, .L60+80
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #336
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+84
+	ldr	r2, .L60
+	ldr	r3, .L60+84
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #340
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+88
+	ldr	r2, .L60
+	ldr	r3, .L60+88
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #344
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+92
+	ldr	r2, .L60
+	ldr	r3, .L60+92
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #348
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+96
+	ldr	r2, .L60
+	ldr	r3, .L60+96
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #352
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+100
+	ldr	r2, .L60
+	ldr	r3, .L60+100
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #356
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+104
+	ldr	r2, .L60
+	ldr	r3, .L60+104
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #360
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+108
+	ldr	r2, .L60
+	ldr	r3, .L60+108
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #364
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+112
+	ldr	r2, .L60
+	ldr	r3, .L60+112
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #368
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+116
+	ldr	r2, .L60
+	ldr	r3, .L60+116
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #372
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+120
+	ldr	r2, .L60
+	ldr	r3, .L60+120
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #376
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+124
+	ldr	r2, .L60
+	ldr	r3, .L60+124
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #380
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+128
+	ldr	r2, .L60
+	ldr	r3, .L60+128
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #384
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+132
+	ldr	r2, .L60
+	ldr	r3, .L60+132
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #388
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+136
+	ldr	r2, .L60
+	ldr	r3, .L60+136
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #392
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+140
+	ldr	r2, .L60
+	ldr	r3, .L60+140
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #396
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+144
+	ldr	r2, .L60
+	ldr	r3, .L60+144
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #400
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+148
+	ldr	r2, .L60
+	ldr	r3, .L60+148
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #404
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+152
+	ldr	r2, .L60
+	ldr	r3, .L60+152
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #408
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+156
+	ldr	r2, .L60
+	ldr	r3, .L60+156
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #412
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+160
+	ldr	r2, .L60
+	ldr	r3, .L60+160
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #416
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+164
+	ldr	r2, .L60
+	ldr	r3, .L60+164
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #420
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+168
+	ldr	r2, .L60
+	ldr	r3, .L60+168
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #424
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+172
+	ldr	r2, .L60
+	ldr	r3, .L60+172
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #428
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+176
+	ldr	r2, .L60
+	ldr	r3, .L60+176
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #432
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+180
+	ldr	r2, .L60
+	ldr	r3, .L60+180
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #436
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+184
+	ldr	r2, .L60
+	ldr	r3, .L60+184
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #440
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+188
+	ldr	r2, .L60
+	ldr	r3, .L60+188
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #444
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+192
+	ldr	r2, .L60
+	ldr	r3, .L60+192
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #448
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+196
+	ldr	r2, .L60
+	ldr	r3, .L60+196
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #452
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+200
+	ldr	r2, .L60
+	ldr	r3, .L60+200
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #456
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+204
+	ldr	r2, .L60
+	ldr	r3, .L60+204
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #460
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+208
+	ldr	r2, .L60
+	ldr	r3, .L60+208
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #464
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+212
+	ldr	r2, .L60
+	ldr	r3, .L60+212
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #468
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+216
+	ldr	r2, .L60
+	ldr	r3, .L60+216
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #472
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+220
+	ldr	r2, .L60
+	ldr	r3, .L60+220
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #476
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+224
+	ldr	r2, .L60
+	ldr	r3, .L60+224
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #480
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+228
+	ldr	r2, .L60
+	ldr	r3, .L60+228
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #484
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+232
+	ldr	r2, .L60
+	ldr	r3, .L60+232
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #488
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+236
+	ldr	r2, .L60
+	ldr	r3, .L60+236
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #492
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+240
+	ldr	r2, .L60
+	ldr	r3, .L60+240
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #496
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+244
+	ldr	r2, .L60
+	ldr	r3, .L60+244
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #500
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+248
+	ldr	r2, .L60
+	ldr	r3, .L60+248
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #504
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+252
+	ldr	r2, .L60
+	ldr	r3, .L60+252
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #508
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+256
+	ldr	r2, .L60
+	ldr	r3, .L60+256
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #512
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+260
+	ldr	r2, .L60
+	ldr	r3, .L60+260
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #516
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+264
+	ldr	r2, .L60
+	ldr	r3, .L60+264
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #520
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+268
+	ldr	r2, .L60
+	ldr	r3, .L60+268
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #524
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+272
+	ldr	r2, .L60
+	ldr	r3, .L60+272
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #528
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+276
+	ldr	r2, .L60
+	ldr	r3, .L60+276
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #532
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+280
+	ldr	r2, .L60
+	ldr	r3, .L60+280
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #536
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+284
+	ldr	r2, .L60
+	ldr	r3, .L60+284
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #540
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+288
+	ldr	r2, .L60
+	ldr	r3, .L60+288
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #544
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+292
+	ldr	r2, .L60
+	ldr	r3, .L60+292
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #548
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+296
+	ldr	r2, .L60
+	ldr	r3, .L60+296
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #552
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+300
+	ldr	r2, .L60
+	ldr	r3, .L60+300
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #556
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+304
+	ldr	r2, .L60
+	ldr	r3, .L60+304
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #560
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+308
+	ldr	r2, .L60
+	ldr	r3, .L60+308
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #564
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+312
+	ldr	r2, .L60
+	ldr	r3, .L60+312
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #568
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+316
+	ldr	r2, .L60
+	ldr	r3, .L60+316
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
+	ldr	r2, .L60
 	mov	r3, #572
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58
-	ldr	r3, .L58+320
+	ldr	r2, .L60
+	ldr	r3, .L60+320
 	mov	r1, #0
-	b	.L59
-.L60:
+	b	.L61
+.L62:
 	.align	2
-.L58:
+.L60:
 	.word	maze
 	.word	258
 	.word	262
@@ -2012,1265 +2099,1265 @@ draw_wall:
 	.word	1082
 	.word	maze
 	.word	1084
-.L59:
+.L61:
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #576
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+324
+	ldr	r2, .L60+876
+	ldr	r3, .L60+324
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #580
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+328
+	ldr	r2, .L60+876
+	ldr	r3, .L60+328
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #584
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+332
+	ldr	r2, .L60+876
+	ldr	r3, .L60+332
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #588
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+336
+	ldr	r2, .L60+876
+	ldr	r3, .L60+336
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #592
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+340
+	ldr	r2, .L60+876
+	ldr	r3, .L60+340
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #596
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+344
+	ldr	r2, .L60+876
+	ldr	r3, .L60+344
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #600
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+348
+	ldr	r2, .L60+876
+	ldr	r3, .L60+348
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #604
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+352
+	ldr	r2, .L60+876
+	ldr	r3, .L60+352
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #608
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+356
+	ldr	r2, .L60+876
+	ldr	r3, .L60+356
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #612
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+360
+	ldr	r2, .L60+876
+	ldr	r3, .L60+360
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #616
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+364
+	ldr	r2, .L60+876
+	ldr	r3, .L60+364
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #620
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+368
+	ldr	r2, .L60+876
+	ldr	r3, .L60+368
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #624
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+372
+	ldr	r2, .L60+876
+	ldr	r3, .L60+372
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #628
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+376
+	ldr	r2, .L60+876
+	ldr	r3, .L60+376
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #632
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+380
+	ldr	r2, .L60+876
+	ldr	r3, .L60+380
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #636
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+384
+	ldr	r2, .L60+876
+	ldr	r3, .L60+384
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #640
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+388
+	ldr	r2, .L60+876
+	ldr	r3, .L60+388
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #644
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+392
+	ldr	r2, .L60+876
+	ldr	r3, .L60+392
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #648
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+396
+	ldr	r2, .L60+876
+	ldr	r3, .L60+396
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #652
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+400
+	ldr	r2, .L60+876
+	ldr	r3, .L60+400
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #656
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+404
+	ldr	r2, .L60+876
+	ldr	r3, .L60+404
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #660
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+408
+	ldr	r2, .L60+876
+	ldr	r3, .L60+408
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #664
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+412
+	ldr	r2, .L60+876
+	ldr	r3, .L60+412
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #668
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+416
+	ldr	r2, .L60+876
+	ldr	r3, .L60+416
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #672
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+420
+	ldr	r2, .L60+876
+	ldr	r3, .L60+420
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #676
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+424
+	ldr	r2, .L60+876
+	ldr	r3, .L60+424
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #680
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+428
+	ldr	r2, .L60+876
+	ldr	r3, .L60+428
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #684
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+432
+	ldr	r2, .L60+876
+	ldr	r3, .L60+432
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #688
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+436
+	ldr	r2, .L60+876
+	ldr	r3, .L60+436
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #692
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+440
+	ldr	r2, .L60+876
+	ldr	r3, .L60+440
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #696
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+444
+	ldr	r2, .L60+876
+	ldr	r3, .L60+444
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #700
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+448
+	ldr	r2, .L60+876
+	ldr	r3, .L60+448
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #704
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+452
+	ldr	r2, .L60+876
+	ldr	r3, .L60+452
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #708
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+456
+	ldr	r2, .L60+876
+	ldr	r3, .L60+456
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #712
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+460
+	ldr	r2, .L60+876
+	ldr	r3, .L60+460
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #716
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+464
+	ldr	r2, .L60+876
+	ldr	r3, .L60+464
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #720
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+468
+	ldr	r2, .L60+876
+	ldr	r3, .L60+468
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #724
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+472
+	ldr	r2, .L60+876
+	ldr	r3, .L60+472
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #728
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+476
+	ldr	r2, .L60+876
+	ldr	r3, .L60+476
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #732
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+480
+	ldr	r2, .L60+876
+	ldr	r3, .L60+480
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #736
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+484
+	ldr	r2, .L60+876
+	ldr	r3, .L60+484
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #740
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+488
+	ldr	r2, .L60+876
+	ldr	r3, .L60+488
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #744
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+492
+	ldr	r2, .L60+876
+	ldr	r3, .L60+492
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #748
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+496
+	ldr	r2, .L60+876
+	ldr	r3, .L60+496
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #752
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+500
+	ldr	r2, .L60+876
+	ldr	r3, .L60+500
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #756
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+504
+	ldr	r2, .L60+876
+	ldr	r3, .L60+504
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #760
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+508
+	ldr	r2, .L60+876
+	ldr	r3, .L60+508
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #764
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+512
+	ldr	r2, .L60+876
+	ldr	r3, .L60+512
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #768
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+516
+	ldr	r2, .L60+876
+	ldr	r3, .L60+516
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #772
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+520
+	ldr	r2, .L60+876
+	ldr	r3, .L60+520
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #776
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+524
+	ldr	r2, .L60+876
+	ldr	r3, .L60+524
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #780
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+528
+	ldr	r2, .L60+876
+	ldr	r3, .L60+528
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #784
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+532
+	ldr	r2, .L60+876
+	ldr	r3, .L60+532
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #788
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+536
+	ldr	r2, .L60+876
+	ldr	r3, .L60+536
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #792
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+540
+	ldr	r2, .L60+876
+	ldr	r3, .L60+540
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #796
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+544
+	ldr	r2, .L60+876
+	ldr	r3, .L60+544
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #800
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+548
+	ldr	r2, .L60+876
+	ldr	r3, .L60+548
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #804
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+552
+	ldr	r2, .L60+876
+	ldr	r3, .L60+552
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #808
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+556
+	ldr	r2, .L60+876
+	ldr	r3, .L60+556
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #812
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+560
+	ldr	r2, .L60+876
+	ldr	r3, .L60+560
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #816
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+564
+	ldr	r2, .L60+876
+	ldr	r3, .L60+564
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #820
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+568
+	ldr	r2, .L60+876
+	ldr	r3, .L60+568
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #824
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+572
+	ldr	r2, .L60+876
+	ldr	r3, .L60+572
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #828
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+576
+	ldr	r2, .L60+876
+	ldr	r3, .L60+576
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #832
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+580
+	ldr	r2, .L60+876
+	ldr	r3, .L60+580
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #836
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+584
+	ldr	r2, .L60+876
+	ldr	r3, .L60+584
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #840
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+588
+	ldr	r2, .L60+876
+	ldr	r3, .L60+588
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #844
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+592
+	ldr	r2, .L60+876
+	ldr	r3, .L60+592
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #848
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+596
+	ldr	r2, .L60+876
+	ldr	r3, .L60+596
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #852
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+600
+	ldr	r2, .L60+876
+	ldr	r3, .L60+600
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #856
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+604
+	ldr	r2, .L60+876
+	ldr	r3, .L60+604
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #860
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+608
+	ldr	r2, .L60+876
+	ldr	r3, .L60+608
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #864
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+612
+	ldr	r2, .L60+876
+	ldr	r3, .L60+612
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #868
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+616
+	ldr	r2, .L60+876
+	ldr	r3, .L60+616
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #872
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+620
+	ldr	r2, .L60+876
+	ldr	r3, .L60+620
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #876
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+624
+	ldr	r2, .L60+876
+	ldr	r3, .L60+624
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #880
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+628
+	ldr	r2, .L60+876
+	ldr	r3, .L60+628
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #884
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+632
+	ldr	r2, .L60+876
+	ldr	r3, .L60+632
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #888
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+636
+	ldr	r2, .L60+876
+	ldr	r3, .L60+636
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #892
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+640
+	ldr	r2, .L60+876
+	ldr	r3, .L60+640
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #896
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+644
+	ldr	r2, .L60+876
+	ldr	r3, .L60+644
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #900
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+648
+	ldr	r2, .L60+876
+	ldr	r3, .L60+648
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #904
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+652
+	ldr	r2, .L60+876
+	ldr	r3, .L60+652
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #908
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+656
+	ldr	r2, .L60+876
+	ldr	r3, .L60+656
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #912
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+660
+	ldr	r2, .L60+876
+	ldr	r3, .L60+660
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #916
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+664
+	ldr	r2, .L60+876
+	ldr	r3, .L60+664
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #920
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+668
+	ldr	r2, .L60+876
+	ldr	r3, .L60+668
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #924
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+672
+	ldr	r2, .L60+876
+	ldr	r3, .L60+672
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #928
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+676
+	ldr	r2, .L60+876
+	ldr	r3, .L60+676
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #932
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+680
+	ldr	r2, .L60+876
+	ldr	r3, .L60+680
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #936
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+684
+	ldr	r2, .L60+876
+	ldr	r3, .L60+684
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #940
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+688
+	ldr	r2, .L60+876
+	ldr	r3, .L60+688
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #944
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+692
+	ldr	r2, .L60+876
+	ldr	r3, .L60+692
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #948
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+696
+	ldr	r2, .L60+876
+	ldr	r3, .L60+696
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #952
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+700
+	ldr	r2, .L60+876
+	ldr	r3, .L60+700
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #956
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+704
+	ldr	r2, .L60+876
+	ldr	r3, .L60+704
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #960
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+708
+	ldr	r2, .L60+876
+	ldr	r3, .L60+708
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #964
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+712
+	ldr	r2, .L60+876
+	ldr	r3, .L60+712
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #968
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+716
+	ldr	r2, .L60+876
+	ldr	r3, .L60+716
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #972
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+720
+	ldr	r2, .L60+876
+	ldr	r3, .L60+720
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #976
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+724
+	ldr	r2, .L60+876
+	ldr	r3, .L60+724
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #980
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+728
+	ldr	r2, .L60+876
+	ldr	r3, .L60+728
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #984
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+732
+	ldr	r2, .L60+876
+	ldr	r3, .L60+732
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #988
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+736
+	ldr	r2, .L60+876
+	ldr	r3, .L60+736
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #992
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+740
+	ldr	r2, .L60+876
+	ldr	r3, .L60+740
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #996
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+744
+	ldr	r2, .L60+876
+	ldr	r3, .L60+744
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #1000
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+748
+	ldr	r2, .L60+876
+	ldr	r3, .L60+748
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #1004
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+752
+	ldr	r2, .L60+876
+	ldr	r3, .L60+752
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #1008
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+756
+	ldr	r2, .L60+876
+	ldr	r3, .L60+756
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #1012
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+760
+	ldr	r2, .L60+876
+	ldr	r3, .L60+760
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #1016
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+764
+	ldr	r2, .L60+876
+	ldr	r3, .L60+764
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #1020
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+768
+	ldr	r2, .L60+876
+	ldr	r3, .L60+768
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #1024
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+772
+	ldr	r2, .L60+876
+	ldr	r3, .L60+772
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+776
+	ldr	r2, .L60+876
+	ldr	r3, .L60+776
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+780
+	ldr	r2, .L60+876
+	ldr	r3, .L60+780
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+784
+	ldr	r2, .L60+876
+	ldr	r3, .L60+784
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+788
+	ldr	r2, .L60+876
+	ldr	r3, .L60+788
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+792
+	ldr	r2, .L60+876
+	ldr	r3, .L60+792
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+796
+	ldr	r2, .L60+876
+	ldr	r3, .L60+796
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #1040
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+800
+	ldr	r2, .L60+876
+	ldr	r3, .L60+800
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+804
+	ldr	r2, .L60+876
+	ldr	r3, .L60+804
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+808
+	ldr	r2, .L60+876
+	ldr	r3, .L60+808
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+812
+	ldr	r2, .L60+876
+	ldr	r3, .L60+812
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+816
+	ldr	r2, .L60+876
+	ldr	r3, .L60+816
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+820
+	ldr	r2, .L60+876
+	ldr	r3, .L60+820
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+824
+	ldr	r2, .L60+876
+	ldr	r3, .L60+824
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #1056
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+828
+	ldr	r2, .L60+876
+	ldr	r3, .L60+828
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+832
+	ldr	r2, .L60+876
+	ldr	r3, .L60+832
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+836
+	ldr	r2, .L60+876
+	ldr	r3, .L60+836
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+840
+	ldr	r2, .L60+876
+	ldr	r3, .L60+840
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+844
+	ldr	r2, .L60+876
+	ldr	r3, .L60+844
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+848
+	ldr	r2, .L60+876
+	ldr	r3, .L60+848
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+852
+	ldr	r2, .L60+876
+	ldr	r3, .L60+852
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
+	ldr	r2, .L60+876
 	mov	r3, #1072
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+856
+	ldr	r2, .L60+876
+	ldr	r3, .L60+856
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+860
+	ldr	r2, .L60+876
+	ldr	r3, .L60+860
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+864
+	ldr	r2, .L60+876
+	ldr	r3, .L60+864
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+868
+	ldr	r2, .L60+876
+	ldr	r3, .L60+868
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+872
+	ldr	r2, .L60+876
+	ldr	r3, .L60+872
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L58+876
-	ldr	r3, .L58+880
+	ldr	r2, .L60+876
+	ldr	r3, .L60+880
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+4
+	ldr	r2, .L63
+	ldr	r3, .L63+4
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
+	ldr	r2, .L63
 	mov	r3, #1088
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+8
+	ldr	r2, .L63
+	ldr	r3, .L63+8
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+12
+	ldr	r2, .L63
+	ldr	r3, .L63+12
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+16
+	ldr	r2, .L63
+	ldr	r3, .L63+16
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+20
+	ldr	r2, .L63
+	ldr	r3, .L63+20
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+24
+	ldr	r2, .L63
+	ldr	r3, .L63+24
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+28
+	ldr	r2, .L63
+	ldr	r3, .L63+28
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+32
+	ldr	r2, .L63
+	ldr	r3, .L63+32
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
+	ldr	r2, .L63
 	mov	r3, #1104
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+36
+	ldr	r2, .L63
+	ldr	r3, .L63+36
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+40
+	ldr	r2, .L63
+	ldr	r3, .L63+40
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+44
+	ldr	r2, .L63
+	ldr	r3, .L63+44
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+48
+	ldr	r2, .L63
+	ldr	r3, .L63+48
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+52
+	ldr	r2, .L63
+	ldr	r3, .L63+52
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+56
+	ldr	r2, .L63
+	ldr	r3, .L63+56
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+60
+	ldr	r2, .L63
+	ldr	r3, .L63+60
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
+	ldr	r2, .L63
 	mov	r3, #1120
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+64
+	ldr	r2, .L63
+	ldr	r3, .L63+64
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+68
+	ldr	r2, .L63
+	ldr	r3, .L63+68
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+72
+	ldr	r2, .L63
+	ldr	r3, .L63+72
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+76
+	ldr	r2, .L63
+	ldr	r3, .L63+76
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+80
+	ldr	r2, .L63
+	ldr	r3, .L63+80
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+84
+	ldr	r2, .L63
+	ldr	r3, .L63+84
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+88
+	ldr	r2, .L63
+	ldr	r3, .L63+88
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
+	ldr	r2, .L63
 	mov	r3, #1136
 	mov	r1, #0
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+92
+	ldr	r2, .L63
+	ldr	r3, .L63+92
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+96
+	ldr	r2, .L63
+	ldr	r3, .L63+96
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+100
+	ldr	r2, .L63
+	ldr	r3, .L63+100
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+104
+	ldr	r2, .L63
+	ldr	r3, .L63+104
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+108
+	ldr	r2, .L63
+	ldr	r3, .L63+108
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+112
+	ldr	r2, .L63
+	ldr	r3, .L63+112
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+116
+	ldr	r2, .L63
+	ldr	r3, .L63+116
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
+	ldr	r2, .L63
 	mov	r3, #1152
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+120
+	ldr	r2, .L63
+	ldr	r3, .L63+120
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+124
+	ldr	r2, .L63
+	ldr	r3, .L63+124
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+128
+	ldr	r2, .L63
+	ldr	r3, .L63+128
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+132
+	ldr	r2, .L63
+	ldr	r3, .L63+132
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+136
+	ldr	r2, .L63
+	ldr	r3, .L63+136
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+140
+	ldr	r2, .L63
+	ldr	r3, .L63+140
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+144
+	ldr	r2, .L63
+	ldr	r3, .L63+144
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
+	ldr	r2, .L63
 	mov	r3, #1168
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+148
+	ldr	r2, .L63
+	ldr	r3, .L63+148
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+152
+	ldr	r2, .L63
+	ldr	r3, .L63+152
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+156
+	ldr	r2, .L63
+	ldr	r3, .L63+156
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+160
+	ldr	r2, .L63
+	ldr	r3, .L63+160
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+164
+	ldr	r2, .L63
+	ldr	r3, .L63+164
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+168
+	ldr	r2, .L63
+	ldr	r3, .L63+168
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+172
+	ldr	r2, .L63
+	ldr	r3, .L63+172
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
+	ldr	r2, .L63
 	mov	r3, #1184
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+176
+	ldr	r2, .L63
+	ldr	r3, .L63+176
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+180
+	ldr	r2, .L63
+	ldr	r3, .L63+180
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+184
+	ldr	r2, .L63
+	ldr	r3, .L63+184
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+188
+	ldr	r2, .L63
+	ldr	r3, .L63+188
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+192
+	ldr	r2, .L63
+	ldr	r3, .L63+192
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+196
+	ldr	r2, .L63
+	ldr	r3, .L63+196
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
-	ldr	r2, .L61
-	ldr	r3, .L61+200
+	ldr	r2, .L63
+	ldr	r3, .L63+200
 	mov	r1, #1
 	strh	r1, [r2, r3]	@ movhi
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L53
-.L57:
+	b	.L55
+.L59:
 	mov	r3, #0
 	str	r3, [fp, #-8]
-	b	.L54
-.L56:
-	ldr	r1, .L61
+	b	.L56
+.L58:
+	ldr	r1, .L63
 	ldr	r2, [fp, #-12]
 	mov	r3, r2
 	mov	r3, r3, asl #4
@@ -3284,7 +3371,7 @@ draw_wall:
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	cmp	r3, #1
-	bne	.L55
+	bne	.L57
 	ldr	r3, [fp, #-8]
 	mov	r3, r3, asl #16
 	mov	r1, r3, lsr #16
@@ -3298,28 +3385,28 @@ draw_wall:
 	mov	r1, r2
 	mov	r2, r3
 	bl	bg_cell
-.L55:
+.L57:
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
 	str	r3, [fp, #-8]
-.L54:
+.L56:
 	ldr	r3, [fp, #-8]
 	cmp	r3, #29
-	ble	.L56
+	ble	.L58
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L53:
+.L55:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #19
-	ble	.L57
+	ble	.L59
 	sub	sp, fp, #4
 	@ sp needed
 	ldmfd	sp!, {fp, lr}
 	bx	lr
-.L62:
+.L64:
 	.align	2
-.L61:
+.L63:
 	.word	maze
 	.word	1086
 	.word	1090
@@ -3389,8 +3476,8 @@ draw_bg:
 	str	r3, [fp, #-8]
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L64
-.L65:
+	b	.L66
+.L67:
 	ldrh	r3, [fp, #-14]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r2, r3, lsr #16
@@ -3402,10 +3489,10 @@ draw_bg:
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L64:
+.L66:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #38400
-	blt	.L65
+	blt	.L67
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
@@ -3444,12 +3531,12 @@ bg_cell:
 	str	r3, [fp, #-8]
 	mov	r3, #0
 	str	r3, [fp, #-16]
-	b	.L67
-.L70:
+	b	.L69
+.L72:
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L68
-.L69:
+	b	.L70
+.L71:
 	ldrh	r3, [fp, #-26]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r2, r3, lsr #16
@@ -3461,20 +3548,20 @@ bg_cell:
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L68:
+.L70:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #7
-	ble	.L69
+	ble	.L71
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #464
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-16]
 	add	r3, r3, #1
 	str	r3, [fp, #-16]
-.L67:
+.L69:
 	ldr	r3, [fp, #-16]
 	cmp	r3, #7
-	ble	.L70
+	ble	.L72
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
@@ -3512,12 +3599,12 @@ draw_point:
 	str	r3, [fp, #-8]
 	mov	r3, #0
 	str	r3, [fp, #-16]
-	b	.L72
-.L75:
+	b	.L74
+.L77:
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L73
-.L74:
+	b	.L75
+.L76:
 	ldrh	r3, [fp, #-30]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r2, r3, lsr #16
@@ -3529,20 +3616,20 @@ draw_point:
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L73:
+.L75:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #3
-	ble	.L74
+	ble	.L76
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #472
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-16]
 	add	r3, r3, #1
 	str	r3, [fp, #-16]
-.L72:
+.L74:
 	ldr	r3, [fp, #-16]
 	cmp	r3, #3
-	ble	.L75
+	ble	.L77
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
@@ -3562,16 +3649,16 @@ sleep:
 	str	r0, [fp, #-16]
 	mov	r3, #0
 	str	r3, [fp, #-8]
-	b	.L77
-.L78:
+	b	.L79
+.L80:
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
 	str	r3, [fp, #-8]
-.L77:
+.L79:
 	ldr	r2, [fp, #-8]
 	ldr	r3, [fp, #-16]
 	cmp	r2, r3
-	blt	.L78
+	blt	.L80
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4

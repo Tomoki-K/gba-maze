@@ -5,8 +5,8 @@ typedef volatile unsigned short hword;
 #define VRAM 0x06000000
 #define width  240
 #define height 160
-#define player_size 4
-#define block_size 8
+#define player_size  4
+#define block_size   8
 #define stage_width  30
 #define stage_height 20
 #define black  0x0000
@@ -31,7 +31,7 @@ int moveDown(int, int);
 // define other stuff :/
 void sleep(int);
 hword maze[20][30];
-hword portal(hword, hword, hword, hword);
+hword on_portal(hword, hword, hword, hword);
 
 
 // START HERE
@@ -80,44 +80,70 @@ int main(void) {
 				time = 20000;
 			}
 
+			// key control
 			if((*btn_state & right) == 0) {
 				X = moveRight(X, Y);
-			} else if((*btn_state & left) == 0) {
+			}
+			else if((*btn_state & left) == 0) {
 				X = moveLeft(X, Y);
 			}
-			if((*btn_state & up) == 0) {
+			else if((*btn_state & up) == 0) {
 				Y = moveUp(X, Y);
-			} else if((*btn_state & down) == 0) {
+			}
+			else if((*btn_state & down) == 0) {
 				Y = moveDown(X, Y);
 			}
 
-      // portals
-			bg_cell(28,  3, portal_color);
-			bg_cell(17,  4, portal_color);
-			bg_cell( 1,  5, portal_color);
-			bg_cell( 7, 11, portal_color);
-			bg_cell( 5, 16, portal_color);
-			bg_cell(15, 10, red);
-      // portal warp points
-			if(portal(X, Y, 28,  3) == true) {
-				bg_cell(21, 14, bg_color);
-			}
-			if(portal(X, Y, 17,  4) == true) {
-				bg_cell(18,  6, bg_color);
-			}
-			if(portal(X, Y,  1,  5) == true) {
-				bg_cell(14, 10, bg_color);
-			}
-			if(portal(X, Y,  7, 11) == true) {
-				bg_cell( 1, 15, bg_color);
-			}
-			if(portal(X, Y,  5, 16) == true) {
-				bg_cell(11, 17, bg_color);
-			}
+      // portals : bg_cell(x,  y, color);
+			bg_cell( 5,  1, portal_color); // 1 in
+			bg_cell( 1,  3, portal_color); // 1 out
+			bg_cell( 9,  2, portal_color); // 2 in
+			bg_cell( 1, 18, portal_color); // 2 out
+			bg_cell( 6, 18, portal_color); // 3 in
+			bg_cell(28,  1, portal_color); // 3 out
+			bg_cell(18, 14, portal_color); // 4 in
+			bg_cell(16, 18, portal_color); // 4 out
+			bg_cell( 7, 16, portal_color); // 5 in
+			bg_cell( 9, 10, portal_color); // 5 out
+			bg_cell( 9,  4, portal_color); // 6 in
+			bg_cell(18, 10, portal_color); // 6 out
+			bg_cell(19,  7, portal_color); // 7 in
+			bg_cell(28, 14, portal_color); // 7 out
+			bg_cell(28, 18, red);					 // goal
 
+      // portal warp points
+			if(on_portal(X, Y,  5,  1) == true) { // 1
+				X = 1  * block_size;
+				Y = 3  * block_size;
+			}
+			if(on_portal(X, Y,  9,  2) == true) { // 2
+				X = 1  * block_size;
+				Y = 18 * block_size;
+			}
+			if(on_portal(X, Y,  6,  18) == true) { // 3
+				X = 28 * block_size;
+				Y = 1  * block_size;
+			}
+			if(on_portal(X, Y, 18,  14) == true) { // 4
+				X = 16 * block_size;
+				Y = 18 * block_size;
+			}
+			if(on_portal(X, Y,  7, 16) == true) { // 5
+				X = 9  * block_size;
+				Y = 10 * block_size;
+			}
+			if(on_portal(X, Y,  9,  4) == true) { // 6
+				X = 18 * block_size;
+				Y = 10 * block_size;
+			}
+			if(on_portal(X, Y, 19,  7) == true) { // 7
+				X = 28 * block_size;
+				Y = 14 * block_size;
+			}
 			draw_point(bufX, bufY, bg_color);
 			draw_point(X, Y, player_color);
-			if(portal(X, Y, 15, 10) == true) {
+
+			if(on_portal(X, Y, 28, 18) == true) {
 				sleep(100000);
 				draw_bg(bg_color);
 				// draw_ending();
@@ -137,7 +163,7 @@ int main(void) {
 }
 
 
-hword portal(hword x, hword y, hword xblock, hword yblock) {
+hword on_portal(hword x, hword y, hword xblock, hword yblock) {
 	hword CheckX = xblock * block_size;
 	hword CheckY = yblock * block_size;
 	if(CheckX <= x && CheckY <= y && x < CheckX + block_size - player_size + 1 && y < CheckY + block_size - player_size + 1) {
