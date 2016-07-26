@@ -38,16 +38,18 @@ main:
 	strh	r3, [fp, #-46]	@ movhi
 	mvn	r3, #32768
 	strh	r3, [fp, #-48]	@ movhi
-	mov	r3, #31744
+	mov	r3, #31
 	strh	r3, [fp, #-50]	@ movhi
 	mov	r3, #0
 	strh	r3, [fp, #-52]	@ movhi
-	mvn	r3, #64512
+	mov	r3, #31744
 	strh	r3, [fp, #-54]	@ movhi
+	ldr	r3, .L21
+	strh	r3, [fp, #-56]	@ movhi
 	mov	r3, #67108864
 	str	r3, [fp, #-20]
 	ldr	r3, [fp, #-20]
-	ldr	r2, .L21
+	ldr	r2, .L21+4
 	strh	r2, [r3]	@ movhi
 .L20:
 	ldrh	r3, [fp, #-48]	@ movhi
@@ -65,13 +67,13 @@ main:
 	mov	r3, #8
 	str	r3, [fp, #-16]
 .L17:
-	ldr	r3, .L21+4
+	ldr	r3, .L21+8
 	str	r3, [fp, #-24]
 	ldr	r3, [fp, #-12]
 	str	r3, [fp, #-28]
 	ldr	r3, [fp, #-16]
 	str	r3, [fp, #-32]
-	ldr	r3, .L21+8
+	ldr	r3, .L21+12
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-24]
 	ldrh	r3, [r3]	@ movhi
@@ -85,7 +87,7 @@ main:
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
 	bne	.L2
-	ldr	r3, .L21+12
+	ldr	r3, .L21+16
 	str	r3, [fp, #-8]
 	b	.L3
 .L2:
@@ -101,7 +103,7 @@ main:
 	mov	r3, r3, lsr #16
 	cmp	r3, #0
 	bne	.L3
-	ldr	r3, .L21+16
+	ldr	r3, .L21+20
 	str	r3, [fp, #-8]
 .L3:
 	ldr	r3, [fp, #-24]
@@ -181,102 +183,101 @@ main:
 	mov	r0, #5
 	mov	r1, #1
 	mov	r2, r3
-	bl	bg_cell
-	ldrh	r3, [fp, #-54]	@ movhi
+	bl	draw_portal
+	ldrh	r3, [fp, #-56]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #1
 	mov	r1, #3
 	mov	r2, r3
-	bl	bg_cell
+	bl	draw_portal
 	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #9
 	mov	r1, #2
 	mov	r2, r3
-	bl	bg_cell
-	ldrh	r3, [fp, #-54]	@ movhi
+	bl	draw_portal
+	ldrh	r3, [fp, #-56]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #1
 	mov	r1, #18
 	mov	r2, r3
-	bl	bg_cell
+	bl	draw_portal
 	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #6
 	mov	r1, #18
 	mov	r2, r3
-	bl	bg_cell
-	ldrh	r3, [fp, #-54]	@ movhi
+	bl	draw_portal
+	ldrh	r3, [fp, #-56]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #28
 	mov	r1, #1
 	mov	r2, r3
-	bl	bg_cell
+	bl	draw_portal
 	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #18
 	mov	r1, #14
 	mov	r2, r3
-	bl	bg_cell
-	ldrh	r3, [fp, #-54]	@ movhi
+	bl	draw_portal
+	ldrh	r3, [fp, #-56]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #16
 	mov	r1, #18
 	mov	r2, r3
-	bl	bg_cell
+	bl	draw_portal
 	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #7
 	mov	r1, #16
 	mov	r2, r3
-	bl	bg_cell
-	ldrh	r3, [fp, #-54]	@ movhi
+	bl	draw_portal
+	ldrh	r3, [fp, #-56]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #9
 	mov	r1, #10
 	mov	r2, r3
-	bl	bg_cell
+	bl	draw_portal
 	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #9
 	mov	r1, #4
 	mov	r2, r3
-	bl	bg_cell
-	ldrh	r3, [fp, #-54]	@ movhi
+	bl	draw_portal
+	ldrh	r3, [fp, #-56]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #18
 	mov	r1, #10
 	mov	r2, r3
-	bl	bg_cell
+	bl	draw_portal
 	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #19
 	mov	r1, #7
 	mov	r2, r3
-	bl	bg_cell
-	ldrh	r3, [fp, #-54]	@ movhi
+	bl	draw_portal
+	ldrh	r3, [fp, #-56]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #28
 	mov	r1, #14
 	mov	r2, r3
-	bl	bg_cell
+	bl	draw_portal
 	mov	r0, #28
 	mov	r1, #18
-	mov	r2, #31
-	bl	bg_cell
+	bl	draw_heart
 	ldr	r3, [fp, #-12]
 	mov	r3, r3, asl #16
 	mov	r2, r3, lsr #16
@@ -438,7 +439,7 @@ main:
 	mov	r3, r0
 	cmp	r3, #1
 	bne	.L15
-	ldr	r0, .L21+20
+	ldr	r0, .L21+24
 	bl	sleep
 	ldrh	r3, [fp, #-48]	@ movhi
 	mov	r3, r3, asl #16
@@ -451,7 +452,7 @@ main:
 	bl	sleep
 	b	.L17
 .L16:
-	ldr	r3, .L21+4
+	ldr	r3, .L21+8
 	str	r3, [fp, #-24]
 	ldr	r3, [fp, #-24]
 	ldrh	r3, [r3]	@ movhi
@@ -472,6 +473,7 @@ main:
 .L22:
 	.align	2
 .L21:
+	.word	543
 	.word	3843
 	.word	67109168
 	.word	10000
@@ -3384,7 +3386,7 @@ draw_wall:
 	mov	r0, r1
 	mov	r1, r2
 	mov	r2, r3
-	bl	bg_cell
+	bl	draw_block
 .L57:
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
@@ -3499,9 +3501,9 @@ draw_bg:
 	bx	lr
 	.size	draw_bg, .-draw_bg
 	.align	2
-	.global	bg_cell
-	.type	bg_cell, %function
-bg_cell:
+	.global	draw_block
+	.type	draw_block, %function
+draw_block:
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 24
 	@ frame_needed = 1, uses_anonymous_args = 0
@@ -3566,7 +3568,102 @@ bg_cell:
 	@ sp needed
 	ldr	fp, [sp], #4
 	bx	lr
-	.size	bg_cell, .-bg_cell
+	.size	draw_block, .-draw_block
+	.align	2
+	.global	draw_portal
+	.type	draw_portal, %function
+draw_portal:
+	@ Function supports interworking.
+	@ args = 0, pretend = 0, frame = 24
+	@ frame_needed = 1, uses_anonymous_args = 0
+	@ link register save eliminated.
+	str	fp, [sp, #-4]!
+	add	fp, sp, #0
+	sub	sp, sp, #28
+	mov	r3, r2
+	strh	r0, [fp, #-22]	@ movhi
+	strh	r1, [fp, #-24]	@ movhi
+	strh	r3, [fp, #-26]	@ movhi
+	ldrh	r3, [fp, #-22]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r3, r3, asl #4
+	mov	r1, r3
+	ldrh	r3, [fp, #-24]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r2, r3
+	mov	r3, r2
+	mov	r3, r3, asl #4
+	rsb	r3, r2, r3
+	mov	r3, r3, asl #8
+	add	r3, r1, r3
+	add	r3, r3, #100663296
+	str	r3, [fp, #-8]
+	mov	r3, #0
+	str	r3, [fp, #-16]
+	b	.L74
+.L79:
+	mov	r3, #0
+	str	r3, [fp, #-12]
+	b	.L75
+.L78:
+	ldr	r3, [fp, #-12]
+	cmp	r3, #0
+	beq	.L76
+	ldr	r3, [fp, #-12]
+	cmp	r3, #1
+	beq	.L76
+	ldr	r3, [fp, #-12]
+	cmp	r3, #6
+	beq	.L76
+	ldr	r3, [fp, #-12]
+	cmp	r3, #7
+	beq	.L76
+	ldr	r3, [fp, #-16]
+	cmp	r3, #0
+	beq	.L76
+	ldr	r3, [fp, #-16]
+	cmp	r3, #1
+	beq	.L76
+	ldr	r3, [fp, #-16]
+	cmp	r3, #6
+	beq	.L76
+	ldr	r3, [fp, #-16]
+	cmp	r3, #7
+	bne	.L77
+.L76:
+	ldrh	r3, [fp, #-26]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r2, r3, lsr #16
+	ldr	r3, [fp, #-8]
+	strh	r2, [r3]	@ movhi
+.L77:
+	ldr	r3, [fp, #-8]
+	add	r3, r3, #2
+	str	r3, [fp, #-8]
+	ldr	r3, [fp, #-12]
+	add	r3, r3, #1
+	str	r3, [fp, #-12]
+.L75:
+	ldr	r3, [fp, #-12]
+	cmp	r3, #7
+	ble	.L78
+	ldr	r3, [fp, #-8]
+	add	r3, r3, #464
+	str	r3, [fp, #-8]
+	ldr	r3, [fp, #-16]
+	add	r3, r3, #1
+	str	r3, [fp, #-16]
+.L74:
+	ldr	r3, [fp, #-16]
+	cmp	r3, #7
+	ble	.L79
+	sub	sp, fp, #0
+	@ sp needed
+	ldr	fp, [sp], #4
+	bx	lr
+	.size	draw_portal, .-draw_portal
 	.align	2
 	.global	draw_point
 	.type	draw_point, %function
@@ -3599,12 +3696,12 @@ draw_point:
 	str	r3, [fp, #-8]
 	mov	r3, #0
 	str	r3, [fp, #-16]
-	b	.L74
-.L77:
+	b	.L81
+.L84:
 	mov	r3, #0
 	str	r3, [fp, #-12]
-	b	.L75
-.L76:
+	b	.L82
+.L83:
 	ldrh	r3, [fp, #-30]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r2, r3, lsr #16
@@ -3616,25 +3713,491 @@ draw_point:
 	ldr	r3, [fp, #-12]
 	add	r3, r3, #1
 	str	r3, [fp, #-12]
-.L75:
+.L82:
 	ldr	r3, [fp, #-12]
 	cmp	r3, #3
-	ble	.L76
+	ble	.L83
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #472
 	str	r3, [fp, #-8]
 	ldr	r3, [fp, #-16]
 	add	r3, r3, #1
 	str	r3, [fp, #-16]
-.L74:
+.L81:
 	ldr	r3, [fp, #-16]
 	cmp	r3, #3
-	ble	.L77
+	ble	.L84
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
 	bx	lr
 	.size	draw_point, .-draw_point
+	.align	2
+	.global	draw_dot
+	.type	draw_dot, %function
+draw_dot:
+	@ Function supports interworking.
+	@ args = 0, pretend = 0, frame = 24
+	@ frame_needed = 1, uses_anonymous_args = 0
+	@ link register save eliminated.
+	str	fp, [sp, #-4]!
+	add	fp, sp, #0
+	sub	sp, sp, #28
+	str	r0, [fp, #-16]
+	str	r1, [fp, #-20]
+	mov	r3, r2
+	strh	r3, [fp, #-22]	@ movhi
+	ldr	r2, [fp, #-20]
+	mov	r3, r2
+	mov	r3, r3, asl #4
+	rsb	r3, r2, r3
+	mov	r3, r3, asl #4
+	mov	r2, r3
+	ldr	r3, [fp, #-16]
+	add	r3, r2, r3
+	mov	r3, r3, asl #1
+	add	r3, r3, #100663296
+	str	r3, [fp, #-8]
+	ldrh	r3, [fp, #-22]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r2, r3, lsr #16
+	ldr	r3, [fp, #-8]
+	strh	r2, [r3]	@ movhi
+	sub	sp, fp, #0
+	@ sp needed
+	ldr	fp, [sp], #4
+	bx	lr
+	.size	draw_dot, .-draw_dot
+	.align	2
+	.global	draw_heart
+	.type	draw_heart, %function
+draw_heart:
+	@ Function supports interworking.
+	@ args = 0, pretend = 0, frame = 16
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	sub	sp, sp, #16
+	str	r0, [fp, #-16]
+	str	r1, [fp, #-20]
+	ldr	r3, [fp, #-16]
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r3, r3, asl #3
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	strh	r3, [fp, #-6]	@ movhi
+	ldr	r3, [fp, #-20]
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r3, r3, asl #3
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	strh	r3, [fp, #-8]	@ movhi
+	ldr	r3, [fp, #-16]
+	mov	r3, r3, asl #16
+	mov	r2, r3, lsr #16
+	ldr	r3, [fp, #-20]
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87
+	bl	draw_block
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #1
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #1
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #2
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #1
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #5
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #1
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #6
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #1
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r2, r3
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #2
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #1
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #2
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #2
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #2
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #3
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #2
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #4
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #2
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #5
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #2
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #6
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #2
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #7
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #2
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	mov	r2, r3
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #3
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #1
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #3
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #2
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #3
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #3
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #3
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #4
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #3
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #5
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #3
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #6
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #3
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #7
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #3
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #1
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #4
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #2
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #4
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #3
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #4
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #4
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #4
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #5
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #4
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #6
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #4
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #2
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #5
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #3
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #5
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #4
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #5
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #5
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #5
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #3
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #6
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	ldrh	r3, [fp, #-6]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r2, r3, #4
+	ldrh	r3, [fp, #-8]	@ movhi
+	mov	r3, r3, asl #16
+	mov	r3, r3, lsr #16
+	add	r3, r3, #6
+	mov	r0, r2
+	mov	r1, r3
+	ldr	r2, .L87+4
+	bl	draw_dot
+	sub	sp, fp, #4
+	@ sp needed
+	ldmfd	sp!, {fp, lr}
+	bx	lr
+.L88:
+	.align	2
+.L87:
+	.word	50712
+	.word	63519
+	.size	draw_heart, .-draw_heart
 	.align	2
 	.global	sleep
 	.type	sleep, %function
@@ -3649,16 +4212,16 @@ sleep:
 	str	r0, [fp, #-16]
 	mov	r3, #0
 	str	r3, [fp, #-8]
-	b	.L79
-.L80:
+	b	.L90
+.L91:
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
 	str	r3, [fp, #-8]
-.L79:
+.L90:
 	ldr	r2, [fp, #-8]
 	ldr	r3, [fp, #-16]
 	cmp	r2, r3
-	blt	.L80
+	blt	.L91
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4

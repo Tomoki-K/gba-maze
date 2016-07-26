@@ -1,4 +1,4 @@
-File.open('bitmap.txt') do |file|
+File.open('maze_bitmap.txt') do |file|
   str = file.read.gsub(/(\r\n|\r|\n|\f)/,"")
   x = 0
   y = 0

@@ -7,20 +7,26 @@ typedef volatile unsigned short hword;
 #define height 160
 #define player_size  4
 #define block_size   8
-#define stage_width  30
-#define stage_height 20
-#define black  0x0000
-#define red    0x001F
-#define yellow 0x03FF
-#define blue   0x7C00
-#define white  0x7FFF
+#define maze_width  30
+#define maze_height 20
 #define true  1
 #define false 0
+#define black  0x0000
+#define red    0x001F
+#define pink	 0xF81F
+#define blue   0x7C00
+#define orange 0x021F
+#define white  0x7FFF
+#define gray	 0xC618
+// color pallet : http://stackoverflow.com/questions/13720937/c-defined-16bit-high-color
 
 // define draw methods
 // void draw_ending();
 void draw_point(int, int, hword);
-void bg_cell(hword, hword, hword);
+void draw_dot(int, int, hword);
+void draw_block(hword, hword, hword);
+void draw_portal(hword, hword, hword);
+void draw_heart(int, int);
 void draw_wall(hword);
 void draw_bg(hword);
 // define move methods
@@ -47,9 +53,10 @@ int main(void) {
 	hword l_key = 0x0200;
 	// colors
 	hword bg_color = white;
-	hword player_color = blue;
+	hword player_color = red;
 	hword wall_color = black;
-	hword portal_color = yellow;
+	hword portal_in_color = blue;
+	hword portal_out_color =  orange;
 	int time;
 
 	int X;
@@ -94,22 +101,22 @@ int main(void) {
 				Y = moveDown(X, Y);
 			}
 
-      // portals : bg_cell(x,  y, color);
-			bg_cell( 5,  1, portal_color); // 1 in
-			bg_cell( 1,  3, portal_color); // 1 out
-			bg_cell( 9,  2, portal_color); // 2 in
-			bg_cell( 1, 18, portal_color); // 2 out
-			bg_cell( 6, 18, portal_color); // 3 in
-			bg_cell(28,  1, portal_color); // 3 out
-			bg_cell(18, 14, portal_color); // 4 in
-			bg_cell(16, 18, portal_color); // 4 out
-			bg_cell( 7, 16, portal_color); // 5 in
-			bg_cell( 9, 10, portal_color); // 5 out
-			bg_cell( 9,  4, portal_color); // 6 in
-			bg_cell(18, 10, portal_color); // 6 out
-			bg_cell(19,  7, portal_color); // 7 in
-			bg_cell(28, 14, portal_color); // 7 out
-			bg_cell(28, 18, red);					 // goal
+      // portals : draw_block(x,  y, color);
+			draw_portal( 5,  1, portal_in_color); // 1 in
+			draw_portal( 1,  3, portal_out_color); // 1 out
+			draw_portal( 9,  2, portal_in_color); // 2 in
+			draw_portal( 1, 18, portal_out_color); // 2 out
+			draw_portal( 6, 18, portal_in_color); // 3 in
+			draw_portal(28,  1, portal_out_color); // 3 out
+			draw_portal(18, 14, portal_in_color); // 4 in
+			draw_portal(16, 18, portal_out_color); // 4 out
+			draw_portal( 7, 16, portal_in_color); // 5 in
+			draw_portal( 9, 10, portal_out_color); // 5 out
+			draw_portal( 9,  4, portal_in_color); // 6 in
+			draw_portal(18, 10, portal_out_color); // 6 out
+			draw_portal(19,  7, portal_in_color); // 7 in
+			draw_portal(28, 14, portal_out_color); // 7 out
+			draw_heart(28, 18); //goal
 
       // portal warp points
 			if(on_portal(X, Y,  5,  1) == true) { // 1
@@ -857,10 +864,10 @@ void draw_wall(hword color) {
 	maze[19][29] = 1;
 
 
-	for(j = 0; j < stage_height; j++) {
-		for(i = 0; i < stage_width; i++) {
+	for(j = 0; j < maze_height; j++) {
+		for(i = 0; i < maze_width; i++) {
 			if(maze[j][i] == 1) {
-				bg_cell(i, j, color);
+				draw_block(i, j, color);
 			}
 		}
 	}
@@ -876,13 +883,28 @@ void draw_bg(hword color) {
 	}
 }
 
-void bg_cell(hword x, hword y, hword color) {
+void draw_block(hword x, hword y, hword color) {
 	hword *ptr;
 	int i, j;
 	ptr = (hword*) VRAM + x * block_size + y * block_size * width;
 	for(j = 0; j < block_size; j++) {
 		for(i = 0; i < block_size; i++) {
 			*ptr = color;
+			ptr++;
+		}
+		ptr = ptr + width - block_size;
+	}
+}
+
+void draw_portal(hword x, hword y, hword color) {
+	hword *ptr;
+	int i, j;
+	ptr = (hword*) VRAM + x * block_size + y * block_size * width;
+	for(j = 0; j < block_size; j++) {
+		for(i = 0; i < block_size; i++) {
+			if (i == 0 || i == 1 || i == 6 || i == 7 || j == 0 || j == 1 || j == 6 || j == 7) {
+				*ptr = color;
+			}
 			ptr++;
 		}
 		ptr = ptr + width - block_size;
@@ -903,7 +925,49 @@ void draw_point(int x, int y, hword color) {
 	}
 }
 
+void draw_dot(int x, int y, hword color) {
+	hword *ptr;
+	ptr = (hword*) VRAM + x + y * 240;
+	*ptr = color;
+}
 
+void draw_heart(int x, int y) {
+	hword PtrX = x * block_size;
+ 	hword ptrY = y * block_size;
+	draw_block(x, y, gray);
+	draw_dot(PtrX+1, ptrY+1, pink);
+	draw_dot(PtrX+2, ptrY+1, pink);
+	draw_dot(PtrX+5, ptrY+1, pink);
+	draw_dot(PtrX+6, ptrY+1, pink);
+	draw_dot(PtrX+0, ptrY+2, pink);
+	draw_dot(PtrX+1, ptrY+2, pink);
+	draw_dot(PtrX+2, ptrY+2, pink);
+	draw_dot(PtrX+3, ptrY+2, pink);
+	draw_dot(PtrX+4, ptrY+2, pink);
+	draw_dot(PtrX+5, ptrY+2, pink);
+	draw_dot(PtrX+6, ptrY+2, pink);
+	draw_dot(PtrX+7, ptrY+2, pink);
+	draw_dot(PtrX+0, ptrY+3, pink);
+	draw_dot(PtrX+1, ptrY+3, pink);
+	draw_dot(PtrX+2, ptrY+3, pink);
+	draw_dot(PtrX+3, ptrY+3, pink);
+	draw_dot(PtrX+4, ptrY+3, pink);
+	draw_dot(PtrX+5, ptrY+3, pink);
+	draw_dot(PtrX+6, ptrY+3, pink);
+	draw_dot(PtrX+7, ptrY+3, pink);
+	draw_dot(PtrX+1, ptrY+4, pink);
+	draw_dot(PtrX+2, ptrY+4, pink);
+	draw_dot(PtrX+3, ptrY+4, pink);
+	draw_dot(PtrX+4, ptrY+4, pink);
+	draw_dot(PtrX+5, ptrY+4, pink);
+	draw_dot(PtrX+6, ptrY+4, pink);
+	draw_dot(PtrX+2, ptrY+5, pink);
+	draw_dot(PtrX+3, ptrY+5, pink);
+	draw_dot(PtrX+4, ptrY+5, pink);
+	draw_dot(PtrX+5, ptrY+5, pink);
+	draw_dot(PtrX+3, ptrY+6, pink);
+	draw_dot(PtrX+4, ptrY+6, pink);
+}
 
 void sleep(int time) {
 	int i;
