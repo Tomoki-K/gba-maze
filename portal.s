@@ -101,7 +101,7 @@ main:
 	str	r3, [fp, #-24]
 	ldr	r3, [fp, #-12]
 	str	r3, [fp, #-28]
-	mov	r3, #500
+	ldr	r3, .L20+12
 	str	r3, [fp, #-32]
 	ldr	r3, [fp, #-20]
 	ldrh	r3, [r3]	@ movhi
@@ -436,7 +436,7 @@ main:
 	mov	r3, r0
 	cmp	r3, #1
 	bne	.L15
-	ldr	r0, .L20+12
+	ldr	r0, .L20+16
 	bl	sleep
 	ldrh	r3, [fp, #-46]	@ movhi
 	mov	r3, r3, asl #16
@@ -485,6 +485,7 @@ main:
 	.word	543
 	.word	3843
 	.word	67109168
+	.word	10000
 	.word	100000
 	.size	main, .-main
 	.align	2

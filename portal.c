@@ -25,6 +25,7 @@ typedef volatile unsigned short hword;
 #define gray	 0xC618
 #define true  1
 #define false 0
+#define speed 10000 // gba:500, emulator:10000
 
 // define draw methods
 void draw_dot(int, int, hword);
@@ -97,7 +98,7 @@ int main(void) {
 			btn_state = (hword*) 0x04000130;
 			bufX = X;
 			bufY = Y;
-			sleep_time = 500; // speed (larger->slower)
+			sleep_time = speed;
 
 			// key control
 			if((*btn_state & right) == 0) {
