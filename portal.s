@@ -34,20 +34,16 @@ main:
 	strh	r3, [fp, #-42]	@ movhi
 	mov	r3, #128
 	strh	r3, [fp, #-44]	@ movhi
-	mov	r3, #256
-	strh	r3, [fp, #-46]	@ movhi
-	mov	r3, #512
-	strh	r3, [fp, #-48]	@ movhi
 	mvn	r3, #32768
-	strh	r3, [fp, #-50]	@ movhi
+	strh	r3, [fp, #-46]	@ movhi
 	mov	r3, #31
-	strh	r3, [fp, #-52]	@ movhi
+	strh	r3, [fp, #-48]	@ movhi
 	mov	r3, #0
-	strh	r3, [fp, #-54]	@ movhi
+	strh	r3, [fp, #-50]	@ movhi
 	mov	r3, #31744
-	strh	r3, [fp, #-56]	@ movhi
+	strh	r3, [fp, #-52]	@ movhi
 	ldr	r3, .L20
-	strh	r3, [fp, #-58]	@ movhi
+	strh	r3, [fp, #-54]	@ movhi
 	mov	r3, #67108864
 	str	r3, [fp, #-16]
 	ldr	r3, [fp, #-16]
@@ -84,12 +80,12 @@ main:
 	beq	.L2
 	b	.L3
 .L2:
-	ldrh	r3, [fp, #-50]	@ movhi
+	ldrh	r3, [fp, #-46]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, r3
 	bl	draw_bg
-	ldrh	r3, [fp, #-54]	@ movhi
+	ldrh	r3, [fp, #-50]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, r3
@@ -105,7 +101,7 @@ main:
 	str	r3, [fp, #-24]
 	ldr	r3, [fp, #-12]
 	str	r3, [fp, #-28]
-	ldr	r3, .L20+12
+	mov	r3, #500
 	str	r3, [fp, #-32]
 	ldr	r3, [fp, #-20]
 	ldrh	r3, [r3]	@ movhi
@@ -178,98 +174,98 @@ main:
 	bl	moveDown
 	str	r0, [fp, #-12]
 .L5:
-	ldrh	r3, [fp, #-56]	@ movhi
+	ldrh	r3, [fp, #-52]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #5
 	mov	r1, #1
 	mov	r2, r3
 	bl	draw_portal
-	ldrh	r3, [fp, #-58]	@ movhi
+	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #1
 	mov	r1, #3
 	mov	r2, r3
 	bl	draw_portal
-	ldrh	r3, [fp, #-56]	@ movhi
+	ldrh	r3, [fp, #-52]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #9
 	mov	r1, #2
 	mov	r2, r3
 	bl	draw_portal
-	ldrh	r3, [fp, #-58]	@ movhi
+	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #1
 	mov	r1, #18
 	mov	r2, r3
 	bl	draw_portal
-	ldrh	r3, [fp, #-56]	@ movhi
+	ldrh	r3, [fp, #-52]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #6
 	mov	r1, #18
 	mov	r2, r3
 	bl	draw_portal
-	ldrh	r3, [fp, #-58]	@ movhi
+	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #28
 	mov	r1, #1
 	mov	r2, r3
 	bl	draw_portal
-	ldrh	r3, [fp, #-56]	@ movhi
+	ldrh	r3, [fp, #-52]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #18
 	mov	r1, #14
 	mov	r2, r3
 	bl	draw_portal
-	ldrh	r3, [fp, #-58]	@ movhi
+	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #16
 	mov	r1, #18
 	mov	r2, r3
 	bl	draw_portal
-	ldrh	r3, [fp, #-56]	@ movhi
+	ldrh	r3, [fp, #-52]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #7
 	mov	r1, #16
 	mov	r2, r3
 	bl	draw_portal
-	ldrh	r3, [fp, #-58]	@ movhi
+	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #9
 	mov	r1, #10
 	mov	r2, r3
 	bl	draw_portal
-	ldrh	r3, [fp, #-56]	@ movhi
+	ldrh	r3, [fp, #-52]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #9
 	mov	r1, #4
 	mov	r2, r3
 	bl	draw_portal
-	ldrh	r3, [fp, #-58]	@ movhi
+	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #18
 	mov	r1, #10
 	mov	r2, r3
 	bl	draw_portal
-	ldrh	r3, [fp, #-56]	@ movhi
+	ldrh	r3, [fp, #-52]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #19
 	mov	r1, #7
 	mov	r2, r3
 	bl	draw_portal
-	ldrh	r3, [fp, #-58]	@ movhi
+	ldrh	r3, [fp, #-54]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, #28
@@ -412,14 +408,14 @@ main:
 	mov	r3, #112
 	str	r3, [fp, #-12]
 .L14:
-	ldrh	r3, [fp, #-50]	@ movhi
+	ldrh	r3, [fp, #-46]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	ldr	r0, [fp, #-24]
 	ldr	r1, [fp, #-28]
 	mov	r2, r3
 	bl	draw_point
-	ldrh	r3, [fp, #-52]	@ movhi
+	ldrh	r3, [fp, #-48]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	ldr	r0, [fp, #-8]
@@ -440,9 +436,9 @@ main:
 	mov	r3, r0
 	cmp	r3, #1
 	bne	.L15
-	ldr	r0, .L20+16
+	ldr	r0, .L20+12
 	bl	sleep
-	ldrh	r3, [fp, #-50]	@ movhi
+	ldrh	r3, [fp, #-46]	@ movhi
 	mov	r3, r3, asl #16
 	mov	r3, r3, lsr #16
 	mov	r0, r3
@@ -489,7 +485,6 @@ main:
 	.word	543
 	.word	3843
 	.word	67109168
-	.word	10000
 	.word	100000
 	.size	main, .-main
 	.align	2

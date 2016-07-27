@@ -54,13 +54,11 @@ int main(void) {
 	hword *ptr;
 	hword *btn_state;
 	hword start = 0x0008;
-	hword a_button = 0x0001; // <-not working?
+	hword a_button = 0x0001;
 	hword right = 0x0010;
 	hword left  = 0x0020;
 	hword up    = 0x0040;
 	hword down  = 0x0080;
-	hword r_key = 0x0100;
-	hword l_key = 0x0200;
 	// colors
 	hword bg_color = white;
 	hword player_color = red;
@@ -99,16 +97,7 @@ int main(void) {
 			btn_state = (hword*) 0x04000130;
 			bufX = X;
 			bufY = Y;
-			sleep_time = 10000; // speed (larger->slower)
-
-			// alter speed
-			/*
-			if((*btn_state & r_key) == 0) {
-			 	sleep_time = 5000;
-			 } else if((*btn_state & l_key) == 0) {
-			 	sleep_time = 20000;
-			}
-			*/
+			sleep_time = 500; // speed (larger->slower)
 
 			// key control
 			if((*btn_state & right) == 0) {
