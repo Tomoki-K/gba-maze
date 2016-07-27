@@ -1,4 +1,12 @@
-// color pallet : http://stackoverflow.com/questions/13720937/c-defined-16bit-high-color
+/*
+INFORMATION SYSTEM DESIGN EXPERIMENT (Theme 3)
+Group 10 (1G151013 Shuki Higashi, 1G151026 Tomoki Kano)
+===============================================================
+GitHub Repo : https://github.com/Tomoki-K/portalMaze-for-gba.git
+
+reference:
+ - color pallet : http://stackoverflow.com/questions/13720937/c-defined-16bit-high-color
+*/
 typedef volatile unsigned short hword;
 
 #define VRAM 0x06000000
