@@ -1,4 +1,4 @@
- # portal Maze for GBA
+# portal Maze for GBA
 情報システム演習実験I テーマ3 自由制作
 
 ## 仕様
