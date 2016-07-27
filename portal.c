@@ -1,5 +1,5 @@
 /*
-INFORMATION SYSTEM DESIGN EXPERIMENT (Theme 3)
+INFORMATION SYSTEM EXPERIMENT (Theme 3)
 Group 10 (1G151013 Shuki Higashi, 1G151026 Tomoki Kano)
 ===============================================================
 GitHub Repo : https://github.com/Tomoki-K/portalMaze-for-gba.git
@@ -20,9 +20,9 @@ typedef volatile unsigned short hword;
 #define pink	 0xF81F
 #define orange 0x021F
 #define blue   0x7C00
-#define black  0x0000
+#define gray  0x0000
 #define white  0x7FFF
-#define gray	 0xC618
+#define gray	 0x56B5
 #define true  1
 #define false 0
 #define speed 10000 // gba:500, emulator:10000
@@ -63,7 +63,7 @@ int main(void) {
 	// colors
 	hword bg_color = white;
 	hword player_color = red;
-	hword wall_color = black;
+	hword wall_color = gray;
 	hword portal_in_color = blue;
 	hword portal_out_color =  orange;
 	int sleep_time;
@@ -169,7 +169,7 @@ int main(void) {
 				Y = 11 * block_size;
 			}
 			if(on_portal(X, Y, 9, 10) == true){
-					X = 7 * block_size;
+					X = 8 * block_size;
 					Y = 16 * block_size;
 			}
 			if(on_portal(X, Y,  9,  4) == true) { // 6
@@ -232,7 +232,7 @@ int moveRight(int x, int y) {
 	int i;
 	ptr = (hword*) VRAM + x + player_size + y * width;
 	for(i = 0; i < player_size; i++) {
-		if(*ptr == black) { // black => it's a wall!!
+		if(*ptr == gray) { // gray => it's a wall!!
 			isWall = true;
 			break;
 		}
@@ -252,7 +252,7 @@ int moveLeft(int x, int y) {
 	int i;
 	ptr = (hword*) VRAM + x - 1 + y * width;
 	for(i = 0; i < player_size; i++) {
-		if(*ptr == black) {
+		if(*ptr == gray) {
 			isWall = true;
 			break;
 		}
@@ -272,7 +272,7 @@ int moveUp(int x, int y) {
 	int i;
 	ptr = (hword*) VRAM + x + (y - 1) * width;
 	for(i = 0; i < player_size; i++) {
-		if(*ptr == black) {
+		if(*ptr == gray) {
 			isWall = true;
 			break;
 		}
@@ -292,7 +292,7 @@ int moveDown(int x, int y) {
 	int i;
 	ptr = (hword*) VRAM + x + (y + player_size) * width;
 	for(i = 0; i < player_size; i++) {
-		if(*ptr == black) {
+		if(*ptr == gray) {
 			isWall = true;
 			break;
 		}
@@ -1040,7 +1040,7 @@ void draw_bg(hword color) {
 
 // draw title screen
 void draw_title() {
-	draw_bg(black);
+	draw_bg(gray);
 	draw_point2(98, 15, orange);
 	draw_point2(98, 16, orange);
 	draw_point2(98, 17, orange);
@@ -1676,7 +1676,7 @@ void draw_title() {
 
 // draw ending screen
 void draw_ending() {
-	draw_bg(black);
+	draw_bg(gray);
 	draw_point2(27, 37, white);
 	draw_point2(28, 37, white);
 	draw_point2(29, 37, white);
