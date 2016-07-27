@@ -1,9 +1,5 @@
-#
-# How to use this Makefile with make command
-# make NAME=kadai
-#
 
-NAME	= maze
+NAME	= portal
 
 all: $(NAME).mb
 
