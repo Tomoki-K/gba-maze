@@ -131,37 +131,65 @@ int main(void) {
 			draw_portal(28, 14, portal_out_color);	// 7 out
 			draw_heart(28, 18);											//goal
 
-      // portal warp points
+			// portal warp points
 			if(on_portal(X, Y,  5,  1) == true) { // 1
 				X = 1  * block_size;
-				Y = 3  * block_size;
+				Y = 4  * block_size;
+			}
+			if(on_portal(X, Y, 1, 3) == true){
+					X = 4 * block_size;
+					Y = 1 * block_size;
 			}
 			if(on_portal(X, Y,  9,  2) == true) { // 2
 				X = 1  * block_size;
-				Y = 18 * block_size;
+				Y = 17 * block_size;
+			}
+			if(on_portal(X, Y, 1, 18) == true){
+					X = 9 * block_size;
+					Y = 1 * block_size;
 			}
 			if(on_portal(X, Y,  6,  18) == true) { // 3
-				X = 28 * block_size;
+				X = 27 * block_size;
 				Y = 1  * block_size;
 			}
+			if(on_portal(X, Y, 28, 1) == true){
+					X = 5 * block_size;
+					Y = 18 * block_size;
+			}
 			if(on_portal(X, Y, 18,  14) == true) { // 4
-				X = 16 * block_size;
+				X = 15 * block_size;
 				Y = 18 * block_size;
+			}
+			if(on_portal(X, Y, 16, 18) == true){
+					X = 18 * block_size;
+					Y = 15 * block_size;
 			}
 			if(on_portal(X, Y,  7, 16) == true) { // 5
 				X = 9  * block_size;
-				Y = 10 * block_size;
+				Y = 11 * block_size;
+			}
+			if(on_portal(X, Y, 9, 10) == true){
+					X = 7 * block_size;
+					Y = 16 * block_size;
 			}
 			if(on_portal(X, Y,  9,  4) == true) { // 6
 				X = 18 * block_size;
-				Y = 10 * block_size;
+				Y = 9 * block_size;
+			}
+			if(on_portal(X, Y, 18, 10) == true){
+					X = 10 * block_size;
+					Y = 4 * block_size;
 			}
 			if(on_portal(X, Y, 19,  7) == true) { // 7
 				X = 28 * block_size;
-				Y = 14 * block_size;
+				Y = 15 * block_size;
 			}
-			draw_point(bufX, bufY, bg_color);
-			draw_point(X, Y, player_color);
+			if(on_portal(X, Y, 28, 14) == true){
+					X = 18 * block_size;
+					Y = 7 * block_size;
+			}
+			draw_point(bufX, bufY, bg_color);	// player position before warp
+			draw_point(X, Y, player_color);	// player position after warp
 
 			if(on_portal(X, Y, 28, 18) == true) {
 				sleep(100000);
@@ -208,7 +236,7 @@ int moveRight(int x, int y) {
 			isWall = true;
 			break;
 		}
-		ptr += width;
+		ptr += width; // change address
 	}
 	if(isWall == false) {
 		return ++x; // move 1 point to right
@@ -282,7 +310,7 @@ int moveDown(int x, int y) {
 // draw 1x1 pixel "dot"
 void draw_dot(int x, int y, hword color) {
 	hword *ptr;
-	ptr = (hword*) VRAM + x + y * 240;
+	ptr = (hword*) VRAM + x + y * width;
 	*ptr = color;
 }
 
@@ -290,13 +318,13 @@ void draw_dot(int x, int y, hword color) {
 void draw_point2(int x, int y, hword color) {
 	hword *ptr;
 	int i, j;
-	ptr = (hword*) VRAM + x * 2 + y * 2 * 240;
+	ptr = (hword*) VRAM + x * 2 + y * 2 * width;
 	for(j = 0; j < 2; j++) {
 		for(i = 0; i < 2; i++) {
 			*ptr = color;
 			ptr++;
 		}
-		ptr = ptr + 240 - 2;
+		ptr = ptr + width - 2;
 	}
 }
 
@@ -672,7 +700,7 @@ void draw_wall(hword color) {
 	maze[9][11] = 0;
 	maze[9][12] = 1;
 	maze[9][13] = 0;
-	maze[9][14] = 0;
+	maze[9][14] = 1;
 	maze[9][15] = 0;
 	maze[9][16] = 0;
 	maze[9][17] = 0;
