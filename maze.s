@@ -435,6 +435,7 @@ main:
 	mov	r3, r3, lsr #16
 	mov	r0, r3
 	bl	draw_bg
+	bl	draw_ending
 	b	.L17
 .L16:
 	ldr	r0, [fp, #-32]
@@ -6794,6 +6795,710 @@ draw_title:
 	.word	32767
 	.size	draw_title, .-draw_title
 	.align	2
+	.global	draw_ending
+	.type	draw_ending, %function
+draw_ending:
+	@ Function supports interworking.
+	@ args = 0, pretend = 0, frame = 0
+	@ frame_needed = 1, uses_anonymous_args = 0
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	mov	r0, #0
+	bl	draw_bg
+	mov	r0, #27
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #28
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #29
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #32
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #33
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #34
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #35
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #36
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #39
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #40
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #41
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #45
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #46
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #47
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #50
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #51
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #52
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #53
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #54
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #60
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #61
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #62
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #65
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #71
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #72
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #73
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #74
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #75
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #78
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #79
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #80
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #83
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #84
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #85
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #86
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #90
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #93
+	mov	r1, #37
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #26
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #30
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #34
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #38
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #42
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #44
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #48
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #50
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #59
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #63
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #65
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #71
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #77
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #81
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #83
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #87
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #90
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #93
+	mov	r1, #38
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #26
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #34
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #38
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #42
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #44
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #50
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #59
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #65
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #71
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #77
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #81
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #83
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #87
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #90
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #93
+	mov	r1, #39
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #27
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #28
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #29
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #34
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #38
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #39
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #40
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #41
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #42
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #44
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #46
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #47
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #48
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #50
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #51
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #52
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #53
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #54
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #59
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #65
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #71
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #72
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #73
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #74
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #75
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #77
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #78
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #79
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #80
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #81
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #83
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #84
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #85
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #86
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #90
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #93
+	mov	r1, #40
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #30
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #34
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #38
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #42
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #44
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #48
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #50
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #59
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #65
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #71
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #77
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #81
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #83
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #86
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #90
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #93
+	mov	r1, #41
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #26
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #30
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #34
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #38
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #42
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #44
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #48
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #50
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #59
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #63
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #65
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #71
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #77
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #81
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #83
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #87
+	mov	r1, #42
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #27
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #28
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #29
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #34
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #38
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #42
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #45
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #46
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #47
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #50
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #51
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #52
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #53
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #54
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #60
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #61
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #62
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #65
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #66
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #67
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #68
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #69
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #71
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #72
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #73
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #74
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #75
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #77
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #81
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #83
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #87
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #90
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	mov	r0, #93
+	mov	r1, #43
+	ldr	r2, .L102
+	bl	draw_point2
+	sub	sp, fp, #4
+	@ sp needed
+	ldmfd	sp!, {fp, lr}
+	bx	lr
+.L103:
+	.align	2
+.L102:
+	.word	32767
+	.size	draw_ending, .-draw_ending
+	.align	2
 	.global	sleep
 	.type	sleep, %function
 sleep:
@@ -6807,16 +7512,16 @@ sleep:
 	str	r0, [fp, #-16]
 	mov	r3, #0
 	str	r3, [fp, #-8]
-	b	.L102
-.L103:
+	b	.L105
+.L106:
 	ldr	r3, [fp, #-8]
 	add	r3, r3, #1
 	str	r3, [fp, #-8]
-.L102:
+.L105:
 	ldr	r2, [fp, #-8]
 	ldr	r3, [fp, #-16]
 	cmp	r2, r3
-	blt	.L103
+	blt	.L106
 	sub	sp, fp, #0
 	@ sp needed
 	ldr	fp, [sp], #4
