@@ -41,12 +41,12 @@ void sleep(int);
 hword maze[20][30];
 hword on_portal(hword, hword, hword, hword);
 
-
 // START HERE
 int main(void) {
 	hword *ptr;
 	hword *btn_state;
 	hword start = 0x0008;
+	hword a_button = 0x0001; // <-not working?
 	hword right = 0x0010;
 	hword left  = 0x0020;
 	hword up    = 0x0040;
@@ -74,8 +74,8 @@ int main(void) {
 		draw_title();
 		while(1) {
 			btn_state = (hword*) 0x04000130;
-			// press start to start
-			if((*btn_state & start) == 0) {
+			// press A or 'start' to start
+			if((*btn_state & a_button) == 0 || (*btn_state & start) == 0) {
 				break;
 			}
 		}
@@ -176,8 +176,8 @@ int main(void) {
 
 		while(1) {
 			btn_state = (hword*) 0x04000130;
-			// press start to play again
-			if((*btn_state & start) == 0) {
+			// press A or 'start' to play again
+			if((*btn_state & a_button) == 0 || (*btn_state & start) == 0) {
 				break;
 			}
 		}
@@ -301,7 +301,6 @@ void draw_point2(int x, int y, hword color) {
 		ptr = ptr + 240 - 2;
 	}
 }
-
 
 // draw 4x4 pixel "point"
 void draw_point(int x, int y, hword color) {
