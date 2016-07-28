@@ -49,6 +49,10 @@ main:
 	ldr	r3, [fp, #-16]
 	ldr	r2, .L27+8
 	strh	r2, [r3]	@ movhi
+	mov	r3, #8
+	str	r3, [fp, #-8]
+	mov	r3, #7
+	str	r3, [fp, #-12]
 .L26:
 	bl	draw_title
 .L3:
@@ -1761,7 +1765,7 @@ draw_heart:
 .L93:
 	.align	2
 .L92:
-	.word	22197
+	.word	22198
 	.word	63519
 	.size	draw_heart, .-draw_heart
 	.align	2

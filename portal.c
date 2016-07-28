@@ -10,22 +10,22 @@ reference:
 typedef volatile unsigned short hword;
 
 #define VRAM 0x06000000
-#define width  240
-#define height 160
-#define player_size  4
-#define block_size   8
-#define maze_width  30
-#define maze_height 20
-#define red    0x001F
-#define pink	 0xF81F
-#define orange 0x021F
-#define blue   0x7C00
-#define gray  0x0000
-#define white  0x7FFF
-#define gray	 0x56B5
-#define true  1
-#define false 0
-#define speed 10000 // gba:500, emulator:10000
+#define WIDTH  240
+#define HEIGHT 160
+#define PLAYER_SIZE  4
+#define BLOCK_SIZE   8
+#define MAZE_WIDTH  30
+#define MAZE_HEIGHT 20
+#define RED    0x001F
+#define PINK	 0xF81F
+#define ORANGE 0x021F
+#define BLUE   0x7C00
+#define WHITE  0x7FFF
+#define GRAY1	 0x56B5
+#define GRAY2	 0x56B6
+#define TRUE  1
+#define FALSE 0
+#define SPEED 10000 // gba:500, emulator:10000
 
 // define draw methods
 void draw_dot(int, int, hword);
@@ -50,7 +50,9 @@ void sleep(int);
 hword maze[20][30];
 hword on_portal(hword, hword, hword, hword);
 
-// START HERE
+
+/* ======== START HERE ======== */
+
 int main(void) {
 	hword *ptr;
 	hword *btn_state;
@@ -61,11 +63,11 @@ int main(void) {
 	hword up    = 0x0040;
 	hword down  = 0x0080;
 	// colors
-	hword bg_color = white;
-	hword player_color = red;
-	hword wall_color = gray;
-	hword portal_in_color = blue;
-	hword portal_out_color =  orange;
+	hword bg_color = WHITE;
+	hword player_color = RED;
+	hword wall_color = GRAY1;
+	hword portal_in_color = BLUE;
+	hword portal_out_color =  ORANGE;
 	int sleep_time;
 
 	ptr = (hword*) 0x04000000;
@@ -81,7 +83,7 @@ int main(void) {
 		draw_title();
 		while(1) {
 			btn_state = (hword*) 0x04000130;
-			// press A or 'start' to start
+			// press 'A' or 'start' to start
 			if((*btn_state & a_button) == 0 || (*btn_state & start) == 0) {
 				break;
 			}
@@ -98,7 +100,7 @@ int main(void) {
 			btn_state = (hword*) 0x04000130;
 			bufX = X;
 			bufY = Y;
-			sleep_time = speed;
+			sleep_time = SPEED;
 
 			// key control
 			if((*btn_state & right) == 0) {
@@ -132,66 +134,66 @@ int main(void) {
 			draw_heart(28, 18);											//goal
 
 			// portal warp points
-			if(on_portal(X, Y,  5,  1) == true) { // 1
-				X = 1  * block_size;
-				Y = 4  * block_size;
+			if(on_portal(X, Y,  5,  1) == TRUE) { // 1
+				X = 1  * BLOCK_SIZE;
+				Y = 4  * BLOCK_SIZE;
 			}
-			if(on_portal(X, Y, 1, 3) == true){
-					X = 4 * block_size;
-					Y = 1 * block_size;
+			if(on_portal(X, Y, 1, 3) == TRUE){
+					X = 4 * BLOCK_SIZE;
+					Y = 1 * BLOCK_SIZE;
 			}
-			if(on_portal(X, Y,  9,  2) == true) { // 2
-				X = 1  * block_size;
-				Y = 17 * block_size;
+			if(on_portal(X, Y,  9,  2) == TRUE) { // 2
+				X = 1  * BLOCK_SIZE;
+				Y = 17 * BLOCK_SIZE;
 			}
-			if(on_portal(X, Y, 1, 18) == true){
-					X = 9 * block_size;
-					Y = 1 * block_size;
+			if(on_portal(X, Y, 1, 18) == TRUE){
+					X = 9 * BLOCK_SIZE;
+					Y = 1 * BLOCK_SIZE;
 			}
-			if(on_portal(X, Y,  6,  18) == true) { // 3
-				X = 27 * block_size;
-				Y = 1  * block_size;
+			if(on_portal(X, Y,  6,  18) == TRUE) { // 3
+				X = 27 * BLOCK_SIZE;
+				Y = 1  * BLOCK_SIZE;
 			}
-			if(on_portal(X, Y, 28, 1) == true){
-					X = 5 * block_size;
-					Y = 18 * block_size;
+			if(on_portal(X, Y, 28, 1) == TRUE){
+					X = 5 * BLOCK_SIZE;
+					Y = 18 * BLOCK_SIZE;
 			}
-			if(on_portal(X, Y, 18,  14) == true) { // 4
-				X = 15 * block_size;
-				Y = 18 * block_size;
+			if(on_portal(X, Y, 18,  14) == TRUE) { // 4
+				X = 15 * BLOCK_SIZE;
+				Y = 18 * BLOCK_SIZE;
 			}
-			if(on_portal(X, Y, 16, 18) == true){
-					X = 18 * block_size;
-					Y = 15 * block_size;
+			if(on_portal(X, Y, 16, 18) == TRUE){
+					X = 18 * BLOCK_SIZE;
+					Y = 15 * BLOCK_SIZE;
 			}
-			if(on_portal(X, Y,  7, 16) == true) { // 5
-				X = 9  * block_size;
-				Y = 11 * block_size;
+			if(on_portal(X, Y,  7, 16) == TRUE) { // 5
+				X = 9  * BLOCK_SIZE;
+				Y = 11 * BLOCK_SIZE;
 			}
-			if(on_portal(X, Y, 9, 10) == true){
-					X = 8 * block_size;
-					Y = 16 * block_size;
+			if(on_portal(X, Y, 9, 10) == TRUE){
+					X = 8 * BLOCK_SIZE;
+					Y = 16 * BLOCK_SIZE;
 			}
-			if(on_portal(X, Y,  9,  4) == true) { // 6
-				X = 18 * block_size;
-				Y = 9 * block_size;
+			if(on_portal(X, Y,  9,  4) == TRUE) { // 6
+				X = 18 * BLOCK_SIZE;
+				Y = 9 * BLOCK_SIZE;
 			}
-			if(on_portal(X, Y, 18, 10) == true){
-					X = 10 * block_size;
-					Y = 4 * block_size;
+			if(on_portal(X, Y, 18, 10) == TRUE){
+					X = 10 * BLOCK_SIZE;
+					Y = 4 * BLOCK_SIZE;
 			}
-			if(on_portal(X, Y, 19,  7) == true) { // 7
-				X = 28 * block_size;
-				Y = 15 * block_size;
+			if(on_portal(X, Y, 19,  7) == TRUE) { // 7
+				X = 28 * BLOCK_SIZE;
+				Y = 15 * BLOCK_SIZE;
 			}
-			if(on_portal(X, Y, 28, 14) == true){
-					X = 18 * block_size;
-					Y = 7 * block_size;
+			if(on_portal(X, Y, 28, 14) == TRUE){
+					X = 18 * BLOCK_SIZE;
+					Y = 7 * BLOCK_SIZE;
 			}
 			draw_point(bufX, bufY, bg_color);	// player position before warp
 			draw_point(X, Y, player_color);	// player position after warp
 
-			if(on_portal(X, Y, 28, 18) == true) {
+			if(on_portal(X, Y, 28, 18) == TRUE) {
 				sleep(100000);
 				draw_bg(bg_color);
 				draw_ending();
@@ -202,7 +204,7 @@ int main(void) {
 
 		while(1) {
 			btn_state = (hword*) 0x04000130;
-			// press A or 'start' to play again
+			// press 'A' or 'start' to play again
 			if((*btn_state & a_button) == 0 || (*btn_state & start) == 0) {
 				break;
 			}
@@ -213,12 +215,12 @@ int main(void) {
 
 //check if player is on a portal
 hword on_portal(hword x, hword y, hword xblock, hword yblock) {
-	hword checkX = xblock * block_size;
-	hword checkY = yblock * block_size;
-	if(checkX<=x && checkY<=y && x<checkX + block_size-player_size+1 && y<checkY+block_size-player_size+1) {
-		return true;
+	hword checkX = xblock * BLOCK_SIZE;
+	hword checkY = yblock * BLOCK_SIZE;
+	if(checkX<=x && checkY<=y && x<checkX + BLOCK_SIZE-PLAYER_SIZE+1 && y<checkY+BLOCK_SIZE-PLAYER_SIZE+1) {
+		return TRUE;
 	} else {
-		return false;
+		return FALSE;
 	}
 }
 
@@ -228,17 +230,17 @@ hword on_portal(hword x, hword y, hword xblock, hword yblock) {
 // move player towards right
 int moveRight(int x, int y) {
 	hword *ptr;
-	hword isWall = false;
+	hword isWall = FALSE;
 	int i;
-	ptr = (hword*) VRAM + x + player_size + y * width;
-	for(i = 0; i < player_size; i++) {
-		if(*ptr == gray) { // gray => it's a wall!!
-			isWall = true;
+	ptr = (hword*) VRAM + x + PLAYER_SIZE + y * WIDTH;
+	for(i = 0; i < PLAYER_SIZE; i++) {
+		if(*ptr == GRAY1) { // GRAY1 => it's a wall!!
+			isWall = TRUE;
 			break;
 		}
-		ptr += width; // change address
+		ptr += WIDTH; // change address
 	}
-	if(isWall == false) {
+	if(isWall == FALSE) {
 		return ++x; // move 1 point to right
 	} else {
 		return x; // do nothing
@@ -248,17 +250,17 @@ int moveRight(int x, int y) {
 // move player towards left
 int moveLeft(int x, int y) {
 	hword *ptr;
-	hword isWall = false;
+	hword isWall = FALSE;
 	int i;
-	ptr = (hword*) VRAM + x - 1 + y * width;
-	for(i = 0; i < player_size; i++) {
-		if(*ptr == gray) {
-			isWall = true;
+	ptr = (hword*) VRAM + x - 1 + y * WIDTH;
+	for(i = 0; i < PLAYER_SIZE; i++) {
+		if(*ptr == GRAY1) {
+			isWall = TRUE;
 			break;
 		}
-		ptr += width;
+		ptr += WIDTH;
 	}
-	if(isWall == false) {
+	if(isWall == FALSE) {
 		return --x;
 	} else {
 		return x;
@@ -268,17 +270,17 @@ int moveLeft(int x, int y) {
 // move player upwards
 int moveUp(int x, int y) {
 	hword *ptr;
-	hword isWall = false;
+	hword isWall = FALSE;
 	int i;
-	ptr = (hword*) VRAM + x + (y - 1) * width;
-	for(i = 0; i < player_size; i++) {
-		if(*ptr == gray) {
-			isWall = true;
+	ptr = (hword*) VRAM + x + (y - 1) * WIDTH;
+	for(i = 0; i < PLAYER_SIZE; i++) {
+		if(*ptr == GRAY1) {
+			isWall = TRUE;
 			break;
 		}
 		ptr++;
 	}
-	if(isWall == false) {
+	if(isWall == FALSE) {
 		return --y;
 	} else {
 		return y;
@@ -288,17 +290,17 @@ int moveUp(int x, int y) {
 // move player downwards
 int moveDown(int x, int y) {
 	hword *ptr;
-	hword isWall = false;
+	hword isWall = FALSE;
 	int i;
-	ptr = (hword*) VRAM + x + (y + player_size) * width;
-	for(i = 0; i < player_size; i++) {
-		if(*ptr == gray) {
-			isWall = true;
+	ptr = (hword*) VRAM + x + (y + PLAYER_SIZE) * WIDTH;
+	for(i = 0; i < PLAYER_SIZE; i++) {
+		if(*ptr == GRAY1) {
+			isWall = TRUE;
 			break;
 		}
 		ptr++;
 	}
-	if(isWall == false) {
+	if(isWall == FALSE) {
 		return ++y;
 	} else {
 		return y;
@@ -310,7 +312,7 @@ int moveDown(int x, int y) {
 // draw 1x1 pixel "dot"
 void draw_dot(int x, int y, hword color) {
 	hword *ptr;
-	ptr = (hword*) VRAM + x + y * width;
+	ptr = (hword*) VRAM + x + y * WIDTH;
 	*ptr = color;
 }
 
@@ -318,13 +320,13 @@ void draw_dot(int x, int y, hword color) {
 void draw_point2(int x, int y, hword color) {
 	hword *ptr;
 	int i, j;
-	ptr = (hword*) VRAM + x * 2 + y * 2 * width;
+	ptr = (hword*) VRAM + x * 2 + y * 2 * WIDTH;
 	for(j = 0; j < 2; j++) {
 		for(i = 0; i < 2; i++) {
 			*ptr = color;
 			ptr++;
 		}
-		ptr = ptr + width - 2;
+		ptr = ptr + WIDTH - 2;
 	}
 }
 
@@ -333,13 +335,13 @@ void draw_point(int x, int y, hword color) {
 	hword *ptr;
 	int ptrX = x;
 	int ptrY = y;
-	ptr = (hword*) VRAM + ptrX + ptrY * width;
-	for(ptrY = 0; ptrY < player_size; ptrY++) {
-		for(ptrX = 0; ptrX < player_size; ptrX++) {
+	ptr = (hword*) VRAM + ptrX + ptrY * WIDTH;
+	for(ptrY = 0; ptrY < PLAYER_SIZE; ptrY++) {
+		for(ptrX = 0; ptrX < PLAYER_SIZE; ptrX++) {
 			*ptr = color;
 			ptr++;
 		}
-		ptr = ptr + width - player_size;
+		ptr = ptr + WIDTH - PLAYER_SIZE;
 	}
 }
 
@@ -347,13 +349,13 @@ void draw_point(int x, int y, hword color) {
 void draw_block(hword x, hword y, hword color) {
 	hword *ptr;
 	int i, j;
-	ptr = (hword*) VRAM + x * block_size + y * block_size * width;
-	for(j = 0; j < block_size; j++) {
-		for(i = 0; i < block_size; i++) {
+	ptr = (hword*) VRAM + x * BLOCK_SIZE + y * BLOCK_SIZE * WIDTH;
+	for(j = 0; j < BLOCK_SIZE; j++) {
+		for(i = 0; i < BLOCK_SIZE; i++) {
 			*ptr = color;
 			ptr++;
 		}
-		ptr = ptr + width - block_size;
+		ptr = ptr + WIDTH - BLOCK_SIZE;
 	}
 }
 
@@ -361,55 +363,55 @@ void draw_block(hword x, hword y, hword color) {
 void draw_portal(hword x, hword y, hword color) {
 	hword *ptr;
 	int i, j;
-	ptr = (hword*) VRAM + x * block_size + y * block_size * width;
-	for(j = 0; j < block_size; j++) {
-		for(i = 0; i < block_size; i++) {
+	ptr = (hword*) VRAM + x * BLOCK_SIZE + y * BLOCK_SIZE * WIDTH;
+	for(j = 0; j < BLOCK_SIZE; j++) {
+		for(i = 0; i < BLOCK_SIZE; i++) {
 			if (i == 0 || i == 1 || i == 6 || i == 7 || j == 0 || j == 1 || j == 6 || j == 7) {
 				*ptr = color;
 			}
 			ptr++;
 		}
-		ptr = ptr + width - block_size;
+		ptr = ptr + WIDTH - BLOCK_SIZE;
 	}
 }
 
 // draw heart box at goalpoint
 void draw_heart(int x, int y) {
-	hword PtrX = x * block_size;
- 	hword ptrY = y * block_size;
-	draw_block(x, y, gray);
-	draw_dot(PtrX+1, ptrY+1, pink);
-	draw_dot(PtrX+2, ptrY+1, pink);
-	draw_dot(PtrX+5, ptrY+1, pink);
-	draw_dot(PtrX+6, ptrY+1, pink);
-	draw_dot(PtrX+0, ptrY+2, pink);
-	draw_dot(PtrX+1, ptrY+2, pink);
-	draw_dot(PtrX+2, ptrY+2, pink);
-	draw_dot(PtrX+3, ptrY+2, pink);
-	draw_dot(PtrX+4, ptrY+2, pink);
-	draw_dot(PtrX+5, ptrY+2, pink);
-	draw_dot(PtrX+6, ptrY+2, pink);
-	draw_dot(PtrX+7, ptrY+2, pink);
-	draw_dot(PtrX+0, ptrY+3, pink);
-	draw_dot(PtrX+1, ptrY+3, pink);
-	draw_dot(PtrX+2, ptrY+3, pink);
-	draw_dot(PtrX+3, ptrY+3, pink);
-	draw_dot(PtrX+4, ptrY+3, pink);
-	draw_dot(PtrX+5, ptrY+3, pink);
-	draw_dot(PtrX+6, ptrY+3, pink);
-	draw_dot(PtrX+7, ptrY+3, pink);
-	draw_dot(PtrX+1, ptrY+4, pink);
-	draw_dot(PtrX+2, ptrY+4, pink);
-	draw_dot(PtrX+3, ptrY+4, pink);
-	draw_dot(PtrX+4, ptrY+4, pink);
-	draw_dot(PtrX+5, ptrY+4, pink);
-	draw_dot(PtrX+6, ptrY+4, pink);
-	draw_dot(PtrX+2, ptrY+5, pink);
-	draw_dot(PtrX+3, ptrY+5, pink);
-	draw_dot(PtrX+4, ptrY+5, pink);
-	draw_dot(PtrX+5, ptrY+5, pink);
-	draw_dot(PtrX+3, ptrY+6, pink);
-	draw_dot(PtrX+4, ptrY+6, pink);
+	hword PtrX = x * BLOCK_SIZE;
+ 	hword ptrY = y * BLOCK_SIZE;
+	draw_block(x, y, GRAY2);
+	draw_dot(PtrX+1, ptrY+1, PINK);
+	draw_dot(PtrX+2, ptrY+1, PINK);
+	draw_dot(PtrX+5, ptrY+1, PINK);
+	draw_dot(PtrX+6, ptrY+1, PINK);
+	draw_dot(PtrX+0, ptrY+2, PINK);
+	draw_dot(PtrX+1, ptrY+2, PINK);
+	draw_dot(PtrX+2, ptrY+2, PINK);
+	draw_dot(PtrX+3, ptrY+2, PINK);
+	draw_dot(PtrX+4, ptrY+2, PINK);
+	draw_dot(PtrX+5, ptrY+2, PINK);
+	draw_dot(PtrX+6, ptrY+2, PINK);
+	draw_dot(PtrX+7, ptrY+2, PINK);
+	draw_dot(PtrX+0, ptrY+3, PINK);
+	draw_dot(PtrX+1, ptrY+3, PINK);
+	draw_dot(PtrX+2, ptrY+3, PINK);
+	draw_dot(PtrX+3, ptrY+3, PINK);
+	draw_dot(PtrX+4, ptrY+3, PINK);
+	draw_dot(PtrX+5, ptrY+3, PINK);
+	draw_dot(PtrX+6, ptrY+3, PINK);
+	draw_dot(PtrX+7, ptrY+3, PINK);
+	draw_dot(PtrX+1, ptrY+4, PINK);
+	draw_dot(PtrX+2, ptrY+4, PINK);
+	draw_dot(PtrX+3, ptrY+4, PINK);
+	draw_dot(PtrX+4, ptrY+4, PINK);
+	draw_dot(PtrX+5, ptrY+4, PINK);
+	draw_dot(PtrX+6, ptrY+4, PINK);
+	draw_dot(PtrX+2, ptrY+5, PINK);
+	draw_dot(PtrX+3, ptrY+5, PINK);
+	draw_dot(PtrX+4, ptrY+5, PINK);
+	draw_dot(PtrX+5, ptrY+5, PINK);
+	draw_dot(PtrX+3, ptrY+6, PINK);
+	draw_dot(PtrX+4, ptrY+6, PINK);
 }
 
 // draw maze walls
@@ -1018,8 +1020,8 @@ void draw_wall(hword color) {
 	maze[19][29] = 1;
 
 
-	for(j = 0; j < maze_height; j++) {
-		for(i = 0; i < maze_width; i++) {
+	for(j = 0; j < MAZE_HEIGHT; j++) {
+		for(i = 0; i < MAZE_WIDTH; i++) {
 			if(maze[j][i] == 1) {
 				draw_block(i, j, color);
 			}
@@ -1040,814 +1042,814 @@ void draw_bg(hword color) {
 
 // draw title screen
 void draw_title() {
-	draw_bg(gray);
-	draw_point2(98, 15, orange);
-	draw_point2(98, 16, orange);
-	draw_point2(98, 17, orange);
-	draw_point2(98, 18, orange);
-	draw_point2(104, 18, white);
-	draw_point2(105, 18, white);
-	draw_point2(98, 19, orange);
-	draw_point2(102, 19, white);
-	draw_point2(103, 19, white);
-	draw_point2(104, 19, white);
-	draw_point2(105, 19, white);
-	draw_point2(106, 19, white);
-	draw_point2(107, 19, white);
-	draw_point2(98, 20, orange);
-	draw_point2(102, 20, white);
-	draw_point2(103, 20, white);
-	draw_point2(104, 20, white);
-	draw_point2(105, 20, white);
-	draw_point2(106, 20, white);
-	draw_point2(107, 20, white);
-	draw_point2(98, 21, orange);
-	draw_point2(101, 21, white);
-	draw_point2(102, 21, white);
-	draw_point2(103, 21, white);
-	draw_point2(104, 21, white);
-	draw_point2(105, 21, white);
-	draw_point2(106, 21, white);
-	draw_point2(107, 21, white);
-	draw_point2(108, 21, white);
-	draw_point2(98, 22, orange);
-	draw_point2(101, 22, white);
-	draw_point2(102, 22, white);
-	draw_point2(103, 22, white);
-	draw_point2(104, 22, white);
-	draw_point2(105, 22, white);
-	draw_point2(106, 22, white);
-	draw_point2(107, 22, white);
-	draw_point2(108, 22, white);
-	draw_point2(98, 23, orange);
-	draw_point2(102, 23, white);
-	draw_point2(103, 23, white);
-	draw_point2(104, 23, white);
-	draw_point2(105, 23, white);
-	draw_point2(106, 23, white);
-	draw_point2(107, 23, white);
-	draw_point2(98, 24, orange);
-	draw_point2(99, 24, white);
-	draw_point2(102, 24, white);
-	draw_point2(103, 24, white);
-	draw_point2(104, 24, white);
-	draw_point2(105, 24, white);
-	draw_point2(106, 24, white);
-	draw_point2(107, 24, white);
-	draw_point2(13, 25, white);
-	draw_point2(14, 25, white);
-	draw_point2(15, 25, white);
-	draw_point2(16, 25, white);
-	draw_point2(17, 25, white);
-	draw_point2(18, 25, white);
-	draw_point2(19, 25, white);
-	draw_point2(20, 25, white);
-	draw_point2(30, 25, blue);
-	draw_point2(31, 25, blue);
-	draw_point2(32, 25, blue);
-	draw_point2(33, 25, blue);
-	draw_point2(42, 25, white);
-	draw_point2(43, 25, white);
-	draw_point2(44, 25, white);
-	draw_point2(45, 25, white);
-	draw_point2(46, 25, white);
-	draw_point2(47, 25, white);
-	draw_point2(48, 25, white);
-	draw_point2(49, 25, white);
-	draw_point2(56, 25, white);
-	draw_point2(57, 25, white);
-	draw_point2(58, 25, white);
-	draw_point2(59, 25, white);
-	draw_point2(60, 25, white);
-	draw_point2(61, 25, white);
-	draw_point2(62, 25, white);
-	draw_point2(63, 25, white);
-	draw_point2(64, 25, white);
-	draw_point2(65, 25, white);
-	draw_point2(73, 25, white);
-	draw_point2(82, 25, white);
-	draw_point2(83, 25, white);
-	draw_point2(98, 25, orange);
-	draw_point2(99, 25, white);
-	draw_point2(100, 25, white);
-	draw_point2(104, 25, white);
-	draw_point2(105, 25, white);
-	draw_point2(13, 26, white);
-	draw_point2(14, 26, white);
-	draw_point2(15, 26, white);
-	draw_point2(16, 26, white);
-	draw_point2(17, 26, white);
-	draw_point2(18, 26, white);
-	draw_point2(19, 26, white);
-	draw_point2(20, 26, white);
-	draw_point2(21, 26, white);
-	draw_point2(28, 26, blue);
-	draw_point2(29, 26, blue);
-	draw_point2(30, 26, blue);
-	draw_point2(31, 26, blue);
-	draw_point2(32, 26, blue);
-	draw_point2(33, 26, blue);
-	draw_point2(34, 26, blue);
-	draw_point2(35, 26, blue);
-	draw_point2(42, 26, white);
-	draw_point2(43, 26, white);
-	draw_point2(44, 26, white);
-	draw_point2(45, 26, white);
-	draw_point2(46, 26, white);
-	draw_point2(47, 26, white);
-	draw_point2(48, 26, white);
-	draw_point2(49, 26, white);
-	draw_point2(50, 26, white);
-	draw_point2(56, 26, white);
-	draw_point2(57, 26, white);
-	draw_point2(58, 26, white);
-	draw_point2(59, 26, white);
-	draw_point2(60, 26, white);
-	draw_point2(61, 26, white);
-	draw_point2(62, 26, white);
-	draw_point2(63, 26, white);
-	draw_point2(64, 26, white);
-	draw_point2(65, 26, white);
-	draw_point2(72, 26, white);
-	draw_point2(73, 26, white);
-	draw_point2(74, 26, white);
-	draw_point2(82, 26, white);
-	draw_point2(83, 26, white);
-	draw_point2(98, 26, orange);
-	draw_point2(99, 26, white);
-	draw_point2(100, 26, white);
-	draw_point2(101, 26, white);
-	draw_point2(13, 27, white);
-	draw_point2(14, 27, white);
-	draw_point2(20, 27, white);
-	draw_point2(21, 27, white);
-	draw_point2(22, 27, white);
-	draw_point2(27, 27, blue);
-	draw_point2(28, 27, blue);
-	draw_point2(35, 27, blue);
-	draw_point2(36, 27, blue);
-	draw_point2(42, 27, white);
-	draw_point2(43, 27, white);
-	draw_point2(49, 27, white);
-	draw_point2(50, 27, white);
-	draw_point2(51, 27, white);
-	draw_point2(60, 27, white);
-	draw_point2(61, 27, white);
-	draw_point2(72, 27, white);
-	draw_point2(73, 27, white);
-	draw_point2(74, 27, white);
-	draw_point2(82, 27, white);
-	draw_point2(83, 27, white);
-	draw_point2(98, 27, orange);
-	draw_point2(99, 27, white);
-	draw_point2(100, 27, white);
-	draw_point2(101, 27, white);
-	draw_point2(102, 27, white);
-	draw_point2(13, 28, white);
-	draw_point2(14, 28, white);
-	draw_point2(21, 28, white);
-	draw_point2(22, 28, white);
-	draw_point2(26, 28, blue);
-	draw_point2(27, 28, blue);
-	draw_point2(36, 28, blue);
-	draw_point2(37, 28, blue);
-	draw_point2(42, 28, white);
-	draw_point2(43, 28, white);
-	draw_point2(50, 28, white);
-	draw_point2(51, 28, white);
-	draw_point2(60, 28, white);
-	draw_point2(61, 28, white);
-	draw_point2(71, 28, white);
-	draw_point2(72, 28, white);
-	draw_point2(74, 28, white);
-	draw_point2(75, 28, white);
-	draw_point2(82, 28, white);
-	draw_point2(83, 28, white);
-	draw_point2(98, 28, orange);
-	draw_point2(99, 28, white);
-	draw_point2(100, 28, white);
-	draw_point2(101, 28, white);
-	draw_point2(102, 28, white);
-	draw_point2(103, 28, white);
-	draw_point2(13, 29, white);
-	draw_point2(14, 29, white);
-	draw_point2(21, 29, white);
-	draw_point2(22, 29, white);
-	draw_point2(26, 29, blue);
-	draw_point2(27, 29, blue);
-	draw_point2(36, 29, blue);
-	draw_point2(37, 29, blue);
-	draw_point2(42, 29, white);
-	draw_point2(43, 29, white);
-	draw_point2(50, 29, white);
-	draw_point2(51, 29, white);
-	draw_point2(60, 29, white);
-	draw_point2(61, 29, white);
-	draw_point2(71, 29, white);
-	draw_point2(72, 29, white);
-	draw_point2(74, 29, white);
-	draw_point2(75, 29, white);
-	draw_point2(82, 29, white);
-	draw_point2(83, 29, white);
-	draw_point2(98, 29, orange);
-	draw_point2(99, 29, white);
-	draw_point2(100, 29, white);
-	draw_point2(101, 29, white);
-	draw_point2(102, 29, white);
-	draw_point2(103, 29, white);
-	draw_point2(13, 30, white);
-	draw_point2(14, 30, white);
-	draw_point2(21, 30, white);
-	draw_point2(22, 30, white);
-	draw_point2(26, 30, blue);
-	draw_point2(27, 30, blue);
-	draw_point2(36, 30, blue);
-	draw_point2(37, 30, blue);
-	draw_point2(42, 30, white);
-	draw_point2(43, 30, white);
-	draw_point2(50, 30, white);
-	draw_point2(51, 30, white);
-	draw_point2(60, 30, white);
-	draw_point2(61, 30, white);
-	draw_point2(71, 30, white);
-	draw_point2(75, 30, white);
-	draw_point2(82, 30, white);
-	draw_point2(83, 30, white);
-	draw_point2(98, 30, orange);
-	draw_point2(99, 30, white);
-	draw_point2(100, 30, white);
-	draw_point2(101, 30, white);
-	draw_point2(102, 30, white);
-	draw_point2(103, 30, white);
-	draw_point2(13, 31, white);
-	draw_point2(14, 31, white);
-	draw_point2(20, 31, white);
-	draw_point2(21, 31, white);
-	draw_point2(26, 31, blue);
-	draw_point2(27, 31, blue);
-	draw_point2(36, 31, blue);
-	draw_point2(37, 31, blue);
-	draw_point2(42, 31, white);
-	draw_point2(43, 31, white);
-	draw_point2(49, 31, white);
-	draw_point2(50, 31, white);
-	draw_point2(60, 31, white);
-	draw_point2(61, 31, white);
-	draw_point2(70, 31, white);
-	draw_point2(71, 31, white);
-	draw_point2(75, 31, white);
-	draw_point2(76, 31, white);
-	draw_point2(82, 31, white);
-	draw_point2(83, 31, white);
-	draw_point2(98, 31, orange);
-	draw_point2(99, 31, white);
-	draw_point2(100, 31, white);
-	draw_point2(101, 31, white);
-	draw_point2(102, 31, white);
-	draw_point2(103, 31, white);
-	draw_point2(13, 32, white);
-	draw_point2(14, 32, white);
-	draw_point2(15, 32, white);
-	draw_point2(16, 32, white);
-	draw_point2(17, 32, white);
-	draw_point2(18, 32, white);
-	draw_point2(19, 32, white);
-	draw_point2(20, 32, white);
-	draw_point2(21, 32, white);
-	draw_point2(26, 32, blue);
-	draw_point2(27, 32, blue);
-	draw_point2(36, 32, blue);
-	draw_point2(37, 32, blue);
-	draw_point2(42, 32, white);
-	draw_point2(43, 32, white);
-	draw_point2(44, 32, white);
-	draw_point2(45, 32, white);
-	draw_point2(46, 32, white);
-	draw_point2(47, 32, white);
-	draw_point2(48, 32, white);
-	draw_point2(49, 32, white);
-	draw_point2(50, 32, white);
-	draw_point2(60, 32, white);
-	draw_point2(61, 32, white);
-	draw_point2(70, 32, white);
-	draw_point2(71, 32, white);
-	draw_point2(75, 32, white);
-	draw_point2(76, 32, white);
-	draw_point2(82, 32, white);
-	draw_point2(83, 32, white);
-	draw_point2(98, 32, orange);
-	draw_point2(99, 32, white);
-	draw_point2(100, 32, white);
-	draw_point2(102, 32, white);
-	draw_point2(103, 32, white);
-	draw_point2(104, 32, white);
-	draw_point2(13, 33, white);
-	draw_point2(14, 33, white);
-	draw_point2(26, 33, blue);
-	draw_point2(27, 33, blue);
-	draw_point2(36, 33, blue);
-	draw_point2(37, 33, blue);
-	draw_point2(42, 33, white);
-	draw_point2(43, 33, white);
-	draw_point2(49, 33, white);
-	draw_point2(60, 33, white);
-	draw_point2(61, 33, white);
-	draw_point2(70, 33, white);
-	draw_point2(71, 33, white);
-	draw_point2(72, 33, white);
-	draw_point2(73, 33, white);
-	draw_point2(74, 33, white);
-	draw_point2(75, 33, white);
-	draw_point2(76, 33, white);
-	draw_point2(82, 33, white);
-	draw_point2(83, 33, white);
-	draw_point2(98, 33, orange);
-	draw_point2(99, 33, white);
-	draw_point2(102, 33, white);
-	draw_point2(103, 33, white);
-	draw_point2(104, 33, white);
-	draw_point2(13, 34, white);
-	draw_point2(14, 34, white);
-	draw_point2(26, 34, blue);
-	draw_point2(27, 34, blue);
-	draw_point2(36, 34, blue);
-	draw_point2(37, 34, blue);
-	draw_point2(42, 34, white);
-	draw_point2(43, 34, white);
-	draw_point2(49, 34, white);
-	draw_point2(50, 34, white);
-	draw_point2(60, 34, white);
-	draw_point2(61, 34, white);
-	draw_point2(69, 34, white);
-	draw_point2(70, 34, white);
-	draw_point2(71, 34, white);
-	draw_point2(72, 34, white);
-	draw_point2(73, 34, white);
-	draw_point2(74, 34, white);
-	draw_point2(75, 34, white);
-	draw_point2(76, 34, white);
-	draw_point2(77, 34, white);
-	draw_point2(82, 34, white);
-	draw_point2(83, 34, white);
-	draw_point2(98, 34, orange);
-	draw_point2(103, 34, white);
-	draw_point2(104, 34, white);
-	draw_point2(105, 34, white);
-	draw_point2(13, 35, white);
-	draw_point2(14, 35, white);
-	draw_point2(26, 35, blue);
-	draw_point2(27, 35, blue);
-	draw_point2(36, 35, blue);
-	draw_point2(37, 35, blue);
-	draw_point2(42, 35, white);
-	draw_point2(43, 35, white);
-	draw_point2(50, 35, white);
-	draw_point2(51, 35, white);
-	draw_point2(60, 35, white);
-	draw_point2(61, 35, white);
-	draw_point2(69, 35, white);
-	draw_point2(70, 35, white);
-	draw_point2(76, 35, white);
-	draw_point2(77, 35, white);
-	draw_point2(82, 35, white);
-	draw_point2(83, 35, white);
-	draw_point2(98, 35, orange);
-	draw_point2(104, 35, white);
-	draw_point2(105, 35, white);
-	draw_point2(106, 35, white);
-	draw_point2(13, 36, white);
-	draw_point2(14, 36, white);
-	draw_point2(27, 36, blue);
-	draw_point2(28, 36, blue);
-	draw_point2(35, 36, blue);
-	draw_point2(36, 36, blue);
-	draw_point2(42, 36, white);
-	draw_point2(43, 36, white);
-	draw_point2(50, 36, white);
-	draw_point2(51, 36, white);
-	draw_point2(60, 36, white);
-	draw_point2(61, 36, white);
-	draw_point2(69, 36, white);
-	draw_point2(77, 36, white);
-	draw_point2(82, 36, white);
-	draw_point2(83, 36, white);
-	draw_point2(98, 36, orange);
-	draw_point2(105, 36, white);
-	draw_point2(106, 36, white);
-	draw_point2(107, 36, white);
-	draw_point2(108, 36, white);
-	draw_point2(13, 37, white);
-	draw_point2(14, 37, white);
-	draw_point2(28, 37, blue);
-	draw_point2(29, 37, blue);
-	draw_point2(30, 37, blue);
-	draw_point2(31, 37, blue);
-	draw_point2(32, 37, blue);
-	draw_point2(33, 37, blue);
-	draw_point2(34, 37, blue);
-	draw_point2(35, 37, blue);
-	draw_point2(42, 37, white);
-	draw_point2(43, 37, white);
-	draw_point2(50, 37, white);
-	draw_point2(51, 37, white);
-	draw_point2(60, 37, white);
-	draw_point2(61, 37, white);
-	draw_point2(68, 37, white);
-	draw_point2(69, 37, white);
-	draw_point2(77, 37, white);
-	draw_point2(78, 37, white);
-	draw_point2(82, 37, white);
-	draw_point2(83, 37, white);
-	draw_point2(98, 37, orange);
-	draw_point2(106, 37, white);
-	draw_point2(107, 37, white);
-	draw_point2(108, 37, white);
-	draw_point2(13, 38, white);
-	draw_point2(14, 38, white);
-	draw_point2(30, 38, blue);
-	draw_point2(31, 38, blue);
-	draw_point2(32, 38, blue);
-	draw_point2(33, 38, blue);
-	draw_point2(42, 38, white);
-	draw_point2(43, 38, white);
-	draw_point2(50, 38, white);
-	draw_point2(51, 38, white);
-	draw_point2(60, 38, white);
-	draw_point2(61, 38, white);
-	draw_point2(68, 38, white);
-	draw_point2(69, 38, white);
-	draw_point2(77, 38, white);
-	draw_point2(78, 38, white);
-	draw_point2(82, 38, white);
-	draw_point2(83, 38, white);
-	draw_point2(84, 38, white);
-	draw_point2(85, 38, white);
-	draw_point2(86, 38, white);
-	draw_point2(87, 38, white);
-	draw_point2(88, 38, white);
-	draw_point2(89, 38, white);
-	draw_point2(90, 38, white);
-	draw_point2(98, 38, orange);
-	draw_point2(99, 38, white);
-	draw_point2(98, 39, orange);
-	draw_point2(99, 39, white);
-	draw_point2(100, 39, white);
-	draw_point2(98, 40, orange);
-	draw_point2(99, 40, white);
-	draw_point2(100, 40, white);
-	draw_point2(101, 40, white);
-	draw_point2(98, 41, orange);
-	draw_point2(99, 41, white);
-	draw_point2(100, 41, white);
-	draw_point2(101, 41, white);
-	draw_point2(102, 41, white);
-	draw_point2(98, 42, orange);
-	draw_point2(100, 42, white);
-	draw_point2(101, 42, white);
-	draw_point2(102, 42, white);
-	draw_point2(98, 43, orange);
-	draw_point2(99, 43, white);
-	draw_point2(100, 43, white);
-	draw_point2(101, 43, white);
-	draw_point2(98, 44, orange);
-	draw_point2(99, 44, white);
-	draw_point2(100, 44, white);
-	draw_point2(98, 45, orange);
-	draw_point2(99, 45, white);
-	draw_point2(98, 46, orange);
-	draw_point2(98, 47, orange);
-	draw_point2(98, 48, orange);
-	draw_point2(54, 58, white);
-	draw_point2(55, 58, white);
-	draw_point2(53, 59, white);
-	draw_point2(56, 59, white);
-	draw_point2(62, 59, white);
-	draw_point2(73, 59, white);
-	draw_point2(89, 59, white);
-	draw_point2(26, 60, white);
-	draw_point2(27, 60, white);
-	draw_point2(28, 60, white);
-	draw_point2(31, 60, white);
-	draw_point2(33, 60, white);
-	draw_point2(34, 60, white);
-	draw_point2(37, 60, white);
-	draw_point2(38, 60, white);
-	draw_point2(42, 60, white);
-	draw_point2(43, 60, white);
-	draw_point2(44, 60, white);
-	draw_point2(47, 60, white);
-	draw_point2(48, 60, white);
-	draw_point2(49, 60, white);
-	draw_point2(53, 60, white);
-	draw_point2(56, 60, white);
-	draw_point2(61, 60, white);
-	draw_point2(62, 60, white);
-	draw_point2(63, 60, white);
-	draw_point2(66, 60, white);
-	draw_point2(67, 60, white);
-	draw_point2(73, 60, white);
-	draw_point2(74, 60, white);
-	draw_point2(75, 60, white);
-	draw_point2(79, 60, white);
-	draw_point2(80, 60, white);
-	draw_point2(84, 60, white);
-	draw_point2(85, 60, white);
-	draw_point2(91, 60, white);
-	draw_point2(92, 60, white);
-	draw_point2(93, 60, white);
-	draw_point2(26, 61, white);
-	draw_point2(29, 61, white);
-	draw_point2(31, 61, white);
-	draw_point2(32, 61, white);
-	draw_point2(36, 61, white);
-	draw_point2(39, 61, white);
-	draw_point2(41, 61, white);
-	draw_point2(46, 61, white);
-	draw_point2(53, 61, white);
-	draw_point2(56, 61, white);
-	draw_point2(62, 61, white);
-	draw_point2(65, 61, white);
-	draw_point2(68, 61, white);
-	draw_point2(73, 61, white);
-	draw_point2(76, 61, white);
-	draw_point2(78, 61, white);
-	draw_point2(81, 61, white);
-	draw_point2(83, 61, white);
-	draw_point2(86, 61, white);
-	draw_point2(89, 61, white);
-	draw_point2(91, 61, white);
-	draw_point2(94, 61, white);
-	draw_point2(18, 62, white);
-	draw_point2(19, 62, white);
-	draw_point2(20, 62, white);
-	draw_point2(21, 62, white);
-	draw_point2(22, 62, white);
-	draw_point2(26, 62, white);
-	draw_point2(29, 62, white);
-	draw_point2(31, 62, white);
-	draw_point2(36, 62, white);
-	draw_point2(37, 62, white);
-	draw_point2(38, 62, white);
-	draw_point2(39, 62, white);
-	draw_point2(42, 62, white);
-	draw_point2(43, 62, white);
-	draw_point2(46, 62, white);
-	draw_point2(47, 62, white);
-	draw_point2(48, 62, white);
-	draw_point2(53, 62, white);
-	draw_point2(54, 62, white);
-	draw_point2(55, 62, white);
-	draw_point2(56, 62, white);
-	draw_point2(62, 62, white);
-	draw_point2(65, 62, white);
-	draw_point2(68, 62, white);
-	draw_point2(73, 62, white);
-	draw_point2(76, 62, white);
-	draw_point2(78, 62, white);
-	draw_point2(79, 62, white);
-	draw_point2(80, 62, white);
-	draw_point2(81, 62, white);
-	draw_point2(83, 62, white);
-	draw_point2(86, 62, white);
-	draw_point2(89, 62, white);
-	draw_point2(91, 62, white);
-	draw_point2(94, 62, white);
-	draw_point2(98, 62, white);
-	draw_point2(99, 62, white);
-	draw_point2(100, 62, white);
-	draw_point2(101, 62, white);
-	draw_point2(102, 62, white);
-	draw_point2(26, 63, white);
-	draw_point2(29, 63, white);
-	draw_point2(31, 63, white);
-	draw_point2(36, 63, white);
-	draw_point2(44, 63, white);
-	draw_point2(49, 63, white);
-	draw_point2(53, 63, white);
-	draw_point2(56, 63, white);
-	draw_point2(62, 63, white);
-	draw_point2(65, 63, white);
-	draw_point2(68, 63, white);
-	draw_point2(73, 63, white);
-	draw_point2(76, 63, white);
-	draw_point2(78, 63, white);
-	draw_point2(83, 63, white);
-	draw_point2(86, 63, white);
-	draw_point2(89, 63, white);
-	draw_point2(91, 63, white);
-	draw_point2(94, 63, white);
-	draw_point2(26, 64, white);
-	draw_point2(27, 64, white);
-	draw_point2(28, 64, white);
-	draw_point2(31, 64, white);
-	draw_point2(37, 64, white);
-	draw_point2(38, 64, white);
-	draw_point2(41, 64, white);
-	draw_point2(42, 64, white);
-	draw_point2(43, 64, white);
-	draw_point2(46, 64, white);
-	draw_point2(47, 64, white);
-	draw_point2(48, 64, white);
-	draw_point2(53, 64, white);
-	draw_point2(56, 64, white);
-	draw_point2(62, 64, white);
-	draw_point2(63, 64, white);
-	draw_point2(66, 64, white);
-	draw_point2(67, 64, white);
-	draw_point2(73, 64, white);
-	draw_point2(74, 64, white);
-	draw_point2(75, 64, white);
-	draw_point2(79, 64, white);
-	draw_point2(80, 64, white);
-	draw_point2(84, 64, white);
-	draw_point2(85, 64, white);
-	draw_point2(86, 64, white);
-	draw_point2(89, 64, white);
-	draw_point2(91, 64, white);
-	draw_point2(94, 64, white);
-	draw_point2(26, 65, white);
-	draw_point2(86, 65, white);
-	draw_point2(26, 66, white);
-	draw_point2(84, 66, white);
-	draw_point2(85, 66, white);
+	draw_bg(GRAY1);
+	draw_point2(98, 15, ORANGE);
+	draw_point2(98, 16, ORANGE);
+	draw_point2(98, 17, ORANGE);
+	draw_point2(98, 18, ORANGE);
+	draw_point2(104, 18, WHITE);
+	draw_point2(105, 18, WHITE);
+	draw_point2(98, 19, ORANGE);
+	draw_point2(102, 19, WHITE);
+	draw_point2(103, 19, WHITE);
+	draw_point2(104, 19, WHITE);
+	draw_point2(105, 19, WHITE);
+	draw_point2(106, 19, WHITE);
+	draw_point2(107, 19, WHITE);
+	draw_point2(98, 20, ORANGE);
+	draw_point2(102, 20, WHITE);
+	draw_point2(103, 20, WHITE);
+	draw_point2(104, 20, WHITE);
+	draw_point2(105, 20, WHITE);
+	draw_point2(106, 20, WHITE);
+	draw_point2(107, 20, WHITE);
+	draw_point2(98, 21, ORANGE);
+	draw_point2(101, 21, WHITE);
+	draw_point2(102, 21, WHITE);
+	draw_point2(103, 21, WHITE);
+	draw_point2(104, 21, WHITE);
+	draw_point2(105, 21, WHITE);
+	draw_point2(106, 21, WHITE);
+	draw_point2(107, 21, WHITE);
+	draw_point2(108, 21, WHITE);
+	draw_point2(98, 22, ORANGE);
+	draw_point2(101, 22, WHITE);
+	draw_point2(102, 22, WHITE);
+	draw_point2(103, 22, WHITE);
+	draw_point2(104, 22, WHITE);
+	draw_point2(105, 22, WHITE);
+	draw_point2(106, 22, WHITE);
+	draw_point2(107, 22, WHITE);
+	draw_point2(108, 22, WHITE);
+	draw_point2(98, 23, ORANGE);
+	draw_point2(102, 23, WHITE);
+	draw_point2(103, 23, WHITE);
+	draw_point2(104, 23, WHITE);
+	draw_point2(105, 23, WHITE);
+	draw_point2(106, 23, WHITE);
+	draw_point2(107, 23, WHITE);
+	draw_point2(98, 24, ORANGE);
+	draw_point2(99, 24, WHITE);
+	draw_point2(102, 24, WHITE);
+	draw_point2(103, 24, WHITE);
+	draw_point2(104, 24, WHITE);
+	draw_point2(105, 24, WHITE);
+	draw_point2(106, 24, WHITE);
+	draw_point2(107, 24, WHITE);
+	draw_point2(13, 25, WHITE);
+	draw_point2(14, 25, WHITE);
+	draw_point2(15, 25, WHITE);
+	draw_point2(16, 25, WHITE);
+	draw_point2(17, 25, WHITE);
+	draw_point2(18, 25, WHITE);
+	draw_point2(19, 25, WHITE);
+	draw_point2(20, 25, WHITE);
+	draw_point2(30, 25, BLUE);
+	draw_point2(31, 25, BLUE);
+	draw_point2(32, 25, BLUE);
+	draw_point2(33, 25, BLUE);
+	draw_point2(42, 25, WHITE);
+	draw_point2(43, 25, WHITE);
+	draw_point2(44, 25, WHITE);
+	draw_point2(45, 25, WHITE);
+	draw_point2(46, 25, WHITE);
+	draw_point2(47, 25, WHITE);
+	draw_point2(48, 25, WHITE);
+	draw_point2(49, 25, WHITE);
+	draw_point2(56, 25, WHITE);
+	draw_point2(57, 25, WHITE);
+	draw_point2(58, 25, WHITE);
+	draw_point2(59, 25, WHITE);
+	draw_point2(60, 25, WHITE);
+	draw_point2(61, 25, WHITE);
+	draw_point2(62, 25, WHITE);
+	draw_point2(63, 25, WHITE);
+	draw_point2(64, 25, WHITE);
+	draw_point2(65, 25, WHITE);
+	draw_point2(73, 25, WHITE);
+	draw_point2(82, 25, WHITE);
+	draw_point2(83, 25, WHITE);
+	draw_point2(98, 25, ORANGE);
+	draw_point2(99, 25, WHITE);
+	draw_point2(100, 25, WHITE);
+	draw_point2(104, 25, WHITE);
+	draw_point2(105, 25, WHITE);
+	draw_point2(13, 26, WHITE);
+	draw_point2(14, 26, WHITE);
+	draw_point2(15, 26, WHITE);
+	draw_point2(16, 26, WHITE);
+	draw_point2(17, 26, WHITE);
+	draw_point2(18, 26, WHITE);
+	draw_point2(19, 26, WHITE);
+	draw_point2(20, 26, WHITE);
+	draw_point2(21, 26, WHITE);
+	draw_point2(28, 26, BLUE);
+	draw_point2(29, 26, BLUE);
+	draw_point2(30, 26, BLUE);
+	draw_point2(31, 26, BLUE);
+	draw_point2(32, 26, BLUE);
+	draw_point2(33, 26, BLUE);
+	draw_point2(34, 26, BLUE);
+	draw_point2(35, 26, BLUE);
+	draw_point2(42, 26, WHITE);
+	draw_point2(43, 26, WHITE);
+	draw_point2(44, 26, WHITE);
+	draw_point2(45, 26, WHITE);
+	draw_point2(46, 26, WHITE);
+	draw_point2(47, 26, WHITE);
+	draw_point2(48, 26, WHITE);
+	draw_point2(49, 26, WHITE);
+	draw_point2(50, 26, WHITE);
+	draw_point2(56, 26, WHITE);
+	draw_point2(57, 26, WHITE);
+	draw_point2(58, 26, WHITE);
+	draw_point2(59, 26, WHITE);
+	draw_point2(60, 26, WHITE);
+	draw_point2(61, 26, WHITE);
+	draw_point2(62, 26, WHITE);
+	draw_point2(63, 26, WHITE);
+	draw_point2(64, 26, WHITE);
+	draw_point2(65, 26, WHITE);
+	draw_point2(72, 26, WHITE);
+	draw_point2(73, 26, WHITE);
+	draw_point2(74, 26, WHITE);
+	draw_point2(82, 26, WHITE);
+	draw_point2(83, 26, WHITE);
+	draw_point2(98, 26, ORANGE);
+	draw_point2(99, 26, WHITE);
+	draw_point2(100, 26, WHITE);
+	draw_point2(101, 26, WHITE);
+	draw_point2(13, 27, WHITE);
+	draw_point2(14, 27, WHITE);
+	draw_point2(20, 27, WHITE);
+	draw_point2(21, 27, WHITE);
+	draw_point2(22, 27, WHITE);
+	draw_point2(27, 27, BLUE);
+	draw_point2(28, 27, BLUE);
+	draw_point2(35, 27, BLUE);
+	draw_point2(36, 27, BLUE);
+	draw_point2(42, 27, WHITE);
+	draw_point2(43, 27, WHITE);
+	draw_point2(49, 27, WHITE);
+	draw_point2(50, 27, WHITE);
+	draw_point2(51, 27, WHITE);
+	draw_point2(60, 27, WHITE);
+	draw_point2(61, 27, WHITE);
+	draw_point2(72, 27, WHITE);
+	draw_point2(73, 27, WHITE);
+	draw_point2(74, 27, WHITE);
+	draw_point2(82, 27, WHITE);
+	draw_point2(83, 27, WHITE);
+	draw_point2(98, 27, ORANGE);
+	draw_point2(99, 27, WHITE);
+	draw_point2(100, 27, WHITE);
+	draw_point2(101, 27, WHITE);
+	draw_point2(102, 27, WHITE);
+	draw_point2(13, 28, WHITE);
+	draw_point2(14, 28, WHITE);
+	draw_point2(21, 28, WHITE);
+	draw_point2(22, 28, WHITE);
+	draw_point2(26, 28, BLUE);
+	draw_point2(27, 28, BLUE);
+	draw_point2(36, 28, BLUE);
+	draw_point2(37, 28, BLUE);
+	draw_point2(42, 28, WHITE);
+	draw_point2(43, 28, WHITE);
+	draw_point2(50, 28, WHITE);
+	draw_point2(51, 28, WHITE);
+	draw_point2(60, 28, WHITE);
+	draw_point2(61, 28, WHITE);
+	draw_point2(71, 28, WHITE);
+	draw_point2(72, 28, WHITE);
+	draw_point2(74, 28, WHITE);
+	draw_point2(75, 28, WHITE);
+	draw_point2(82, 28, WHITE);
+	draw_point2(83, 28, WHITE);
+	draw_point2(98, 28, ORANGE);
+	draw_point2(99, 28, WHITE);
+	draw_point2(100, 28, WHITE);
+	draw_point2(101, 28, WHITE);
+	draw_point2(102, 28, WHITE);
+	draw_point2(103, 28, WHITE);
+	draw_point2(13, 29, WHITE);
+	draw_point2(14, 29, WHITE);
+	draw_point2(21, 29, WHITE);
+	draw_point2(22, 29, WHITE);
+	draw_point2(26, 29, BLUE);
+	draw_point2(27, 29, BLUE);
+	draw_point2(36, 29, BLUE);
+	draw_point2(37, 29, BLUE);
+	draw_point2(42, 29, WHITE);
+	draw_point2(43, 29, WHITE);
+	draw_point2(50, 29, WHITE);
+	draw_point2(51, 29, WHITE);
+	draw_point2(60, 29, WHITE);
+	draw_point2(61, 29, WHITE);
+	draw_point2(71, 29, WHITE);
+	draw_point2(72, 29, WHITE);
+	draw_point2(74, 29, WHITE);
+	draw_point2(75, 29, WHITE);
+	draw_point2(82, 29, WHITE);
+	draw_point2(83, 29, WHITE);
+	draw_point2(98, 29, ORANGE);
+	draw_point2(99, 29, WHITE);
+	draw_point2(100, 29, WHITE);
+	draw_point2(101, 29, WHITE);
+	draw_point2(102, 29, WHITE);
+	draw_point2(103, 29, WHITE);
+	draw_point2(13, 30, WHITE);
+	draw_point2(14, 30, WHITE);
+	draw_point2(21, 30, WHITE);
+	draw_point2(22, 30, WHITE);
+	draw_point2(26, 30, BLUE);
+	draw_point2(27, 30, BLUE);
+	draw_point2(36, 30, BLUE);
+	draw_point2(37, 30, BLUE);
+	draw_point2(42, 30, WHITE);
+	draw_point2(43, 30, WHITE);
+	draw_point2(50, 30, WHITE);
+	draw_point2(51, 30, WHITE);
+	draw_point2(60, 30, WHITE);
+	draw_point2(61, 30, WHITE);
+	draw_point2(71, 30, WHITE);
+	draw_point2(75, 30, WHITE);
+	draw_point2(82, 30, WHITE);
+	draw_point2(83, 30, WHITE);
+	draw_point2(98, 30, ORANGE);
+	draw_point2(99, 30, WHITE);
+	draw_point2(100, 30, WHITE);
+	draw_point2(101, 30, WHITE);
+	draw_point2(102, 30, WHITE);
+	draw_point2(103, 30, WHITE);
+	draw_point2(13, 31, WHITE);
+	draw_point2(14, 31, WHITE);
+	draw_point2(20, 31, WHITE);
+	draw_point2(21, 31, WHITE);
+	draw_point2(26, 31, BLUE);
+	draw_point2(27, 31, BLUE);
+	draw_point2(36, 31, BLUE);
+	draw_point2(37, 31, BLUE);
+	draw_point2(42, 31, WHITE);
+	draw_point2(43, 31, WHITE);
+	draw_point2(49, 31, WHITE);
+	draw_point2(50, 31, WHITE);
+	draw_point2(60, 31, WHITE);
+	draw_point2(61, 31, WHITE);
+	draw_point2(70, 31, WHITE);
+	draw_point2(71, 31, WHITE);
+	draw_point2(75, 31, WHITE);
+	draw_point2(76, 31, WHITE);
+	draw_point2(82, 31, WHITE);
+	draw_point2(83, 31, WHITE);
+	draw_point2(98, 31, ORANGE);
+	draw_point2(99, 31, WHITE);
+	draw_point2(100, 31, WHITE);
+	draw_point2(101, 31, WHITE);
+	draw_point2(102, 31, WHITE);
+	draw_point2(103, 31, WHITE);
+	draw_point2(13, 32, WHITE);
+	draw_point2(14, 32, WHITE);
+	draw_point2(15, 32, WHITE);
+	draw_point2(16, 32, WHITE);
+	draw_point2(17, 32, WHITE);
+	draw_point2(18, 32, WHITE);
+	draw_point2(19, 32, WHITE);
+	draw_point2(20, 32, WHITE);
+	draw_point2(21, 32, WHITE);
+	draw_point2(26, 32, BLUE);
+	draw_point2(27, 32, BLUE);
+	draw_point2(36, 32, BLUE);
+	draw_point2(37, 32, BLUE);
+	draw_point2(42, 32, WHITE);
+	draw_point2(43, 32, WHITE);
+	draw_point2(44, 32, WHITE);
+	draw_point2(45, 32, WHITE);
+	draw_point2(46, 32, WHITE);
+	draw_point2(47, 32, WHITE);
+	draw_point2(48, 32, WHITE);
+	draw_point2(49, 32, WHITE);
+	draw_point2(50, 32, WHITE);
+	draw_point2(60, 32, WHITE);
+	draw_point2(61, 32, WHITE);
+	draw_point2(70, 32, WHITE);
+	draw_point2(71, 32, WHITE);
+	draw_point2(75, 32, WHITE);
+	draw_point2(76, 32, WHITE);
+	draw_point2(82, 32, WHITE);
+	draw_point2(83, 32, WHITE);
+	draw_point2(98, 32, ORANGE);
+	draw_point2(99, 32, WHITE);
+	draw_point2(100, 32, WHITE);
+	draw_point2(102, 32, WHITE);
+	draw_point2(103, 32, WHITE);
+	draw_point2(104, 32, WHITE);
+	draw_point2(13, 33, WHITE);
+	draw_point2(14, 33, WHITE);
+	draw_point2(26, 33, BLUE);
+	draw_point2(27, 33, BLUE);
+	draw_point2(36, 33, BLUE);
+	draw_point2(37, 33, BLUE);
+	draw_point2(42, 33, WHITE);
+	draw_point2(43, 33, WHITE);
+	draw_point2(49, 33, WHITE);
+	draw_point2(60, 33, WHITE);
+	draw_point2(61, 33, WHITE);
+	draw_point2(70, 33, WHITE);
+	draw_point2(71, 33, WHITE);
+	draw_point2(72, 33, WHITE);
+	draw_point2(73, 33, WHITE);
+	draw_point2(74, 33, WHITE);
+	draw_point2(75, 33, WHITE);
+	draw_point2(76, 33, WHITE);
+	draw_point2(82, 33, WHITE);
+	draw_point2(83, 33, WHITE);
+	draw_point2(98, 33, ORANGE);
+	draw_point2(99, 33, WHITE);
+	draw_point2(102, 33, WHITE);
+	draw_point2(103, 33, WHITE);
+	draw_point2(104, 33, WHITE);
+	draw_point2(13, 34, WHITE);
+	draw_point2(14, 34, WHITE);
+	draw_point2(26, 34, BLUE);
+	draw_point2(27, 34, BLUE);
+	draw_point2(36, 34, BLUE);
+	draw_point2(37, 34, BLUE);
+	draw_point2(42, 34, WHITE);
+	draw_point2(43, 34, WHITE);
+	draw_point2(49, 34, WHITE);
+	draw_point2(50, 34, WHITE);
+	draw_point2(60, 34, WHITE);
+	draw_point2(61, 34, WHITE);
+	draw_point2(69, 34, WHITE);
+	draw_point2(70, 34, WHITE);
+	draw_point2(71, 34, WHITE);
+	draw_point2(72, 34, WHITE);
+	draw_point2(73, 34, WHITE);
+	draw_point2(74, 34, WHITE);
+	draw_point2(75, 34, WHITE);
+	draw_point2(76, 34, WHITE);
+	draw_point2(77, 34, WHITE);
+	draw_point2(82, 34, WHITE);
+	draw_point2(83, 34, WHITE);
+	draw_point2(98, 34, ORANGE);
+	draw_point2(103, 34, WHITE);
+	draw_point2(104, 34, WHITE);
+	draw_point2(105, 34, WHITE);
+	draw_point2(13, 35, WHITE);
+	draw_point2(14, 35, WHITE);
+	draw_point2(26, 35, BLUE);
+	draw_point2(27, 35, BLUE);
+	draw_point2(36, 35, BLUE);
+	draw_point2(37, 35, BLUE);
+	draw_point2(42, 35, WHITE);
+	draw_point2(43, 35, WHITE);
+	draw_point2(50, 35, WHITE);
+	draw_point2(51, 35, WHITE);
+	draw_point2(60, 35, WHITE);
+	draw_point2(61, 35, WHITE);
+	draw_point2(69, 35, WHITE);
+	draw_point2(70, 35, WHITE);
+	draw_point2(76, 35, WHITE);
+	draw_point2(77, 35, WHITE);
+	draw_point2(82, 35, WHITE);
+	draw_point2(83, 35, WHITE);
+	draw_point2(98, 35, ORANGE);
+	draw_point2(104, 35, WHITE);
+	draw_point2(105, 35, WHITE);
+	draw_point2(106, 35, WHITE);
+	draw_point2(13, 36, WHITE);
+	draw_point2(14, 36, WHITE);
+	draw_point2(27, 36, BLUE);
+	draw_point2(28, 36, BLUE);
+	draw_point2(35, 36, BLUE);
+	draw_point2(36, 36, BLUE);
+	draw_point2(42, 36, WHITE);
+	draw_point2(43, 36, WHITE);
+	draw_point2(50, 36, WHITE);
+	draw_point2(51, 36, WHITE);
+	draw_point2(60, 36, WHITE);
+	draw_point2(61, 36, WHITE);
+	draw_point2(69, 36, WHITE);
+	draw_point2(77, 36, WHITE);
+	draw_point2(82, 36, WHITE);
+	draw_point2(83, 36, WHITE);
+	draw_point2(98, 36, ORANGE);
+	draw_point2(105, 36, WHITE);
+	draw_point2(106, 36, WHITE);
+	draw_point2(107, 36, WHITE);
+	draw_point2(108, 36, WHITE);
+	draw_point2(13, 37, WHITE);
+	draw_point2(14, 37, WHITE);
+	draw_point2(28, 37, BLUE);
+	draw_point2(29, 37, BLUE);
+	draw_point2(30, 37, BLUE);
+	draw_point2(31, 37, BLUE);
+	draw_point2(32, 37, BLUE);
+	draw_point2(33, 37, BLUE);
+	draw_point2(34, 37, BLUE);
+	draw_point2(35, 37, BLUE);
+	draw_point2(42, 37, WHITE);
+	draw_point2(43, 37, WHITE);
+	draw_point2(50, 37, WHITE);
+	draw_point2(51, 37, WHITE);
+	draw_point2(60, 37, WHITE);
+	draw_point2(61, 37, WHITE);
+	draw_point2(68, 37, WHITE);
+	draw_point2(69, 37, WHITE);
+	draw_point2(77, 37, WHITE);
+	draw_point2(78, 37, WHITE);
+	draw_point2(82, 37, WHITE);
+	draw_point2(83, 37, WHITE);
+	draw_point2(98, 37, ORANGE);
+	draw_point2(106, 37, WHITE);
+	draw_point2(107, 37, WHITE);
+	draw_point2(108, 37, WHITE);
+	draw_point2(13, 38, WHITE);
+	draw_point2(14, 38, WHITE);
+	draw_point2(30, 38, BLUE);
+	draw_point2(31, 38, BLUE);
+	draw_point2(32, 38, BLUE);
+	draw_point2(33, 38, BLUE);
+	draw_point2(42, 38, WHITE);
+	draw_point2(43, 38, WHITE);
+	draw_point2(50, 38, WHITE);
+	draw_point2(51, 38, WHITE);
+	draw_point2(60, 38, WHITE);
+	draw_point2(61, 38, WHITE);
+	draw_point2(68, 38, WHITE);
+	draw_point2(69, 38, WHITE);
+	draw_point2(77, 38, WHITE);
+	draw_point2(78, 38, WHITE);
+	draw_point2(82, 38, WHITE);
+	draw_point2(83, 38, WHITE);
+	draw_point2(84, 38, WHITE);
+	draw_point2(85, 38, WHITE);
+	draw_point2(86, 38, WHITE);
+	draw_point2(87, 38, WHITE);
+	draw_point2(88, 38, WHITE);
+	draw_point2(89, 38, WHITE);
+	draw_point2(90, 38, WHITE);
+	draw_point2(98, 38, ORANGE);
+	draw_point2(99, 38, WHITE);
+	draw_point2(98, 39, ORANGE);
+	draw_point2(99, 39, WHITE);
+	draw_point2(100, 39, WHITE);
+	draw_point2(98, 40, ORANGE);
+	draw_point2(99, 40, WHITE);
+	draw_point2(100, 40, WHITE);
+	draw_point2(101, 40, WHITE);
+	draw_point2(98, 41, ORANGE);
+	draw_point2(99, 41, WHITE);
+	draw_point2(100, 41, WHITE);
+	draw_point2(101, 41, WHITE);
+	draw_point2(102, 41, WHITE);
+	draw_point2(98, 42, ORANGE);
+	draw_point2(100, 42, WHITE);
+	draw_point2(101, 42, WHITE);
+	draw_point2(102, 42, WHITE);
+	draw_point2(98, 43, ORANGE);
+	draw_point2(99, 43, WHITE);
+	draw_point2(100, 43, WHITE);
+	draw_point2(101, 43, WHITE);
+	draw_point2(98, 44, ORANGE);
+	draw_point2(99, 44, WHITE);
+	draw_point2(100, 44, WHITE);
+	draw_point2(98, 45, ORANGE);
+	draw_point2(99, 45, WHITE);
+	draw_point2(98, 46, ORANGE);
+	draw_point2(98, 47, ORANGE);
+	draw_point2(98, 48, ORANGE);
+	draw_point2(54, 58, WHITE);
+	draw_point2(55, 58, WHITE);
+	draw_point2(53, 59, WHITE);
+	draw_point2(56, 59, WHITE);
+	draw_point2(62, 59, WHITE);
+	draw_point2(73, 59, WHITE);
+	draw_point2(89, 59, WHITE);
+	draw_point2(26, 60, WHITE);
+	draw_point2(27, 60, WHITE);
+	draw_point2(28, 60, WHITE);
+	draw_point2(31, 60, WHITE);
+	draw_point2(33, 60, WHITE);
+	draw_point2(34, 60, WHITE);
+	draw_point2(37, 60, WHITE);
+	draw_point2(38, 60, WHITE);
+	draw_point2(42, 60, WHITE);
+	draw_point2(43, 60, WHITE);
+	draw_point2(44, 60, WHITE);
+	draw_point2(47, 60, WHITE);
+	draw_point2(48, 60, WHITE);
+	draw_point2(49, 60, WHITE);
+	draw_point2(53, 60, WHITE);
+	draw_point2(56, 60, WHITE);
+	draw_point2(61, 60, WHITE);
+	draw_point2(62, 60, WHITE);
+	draw_point2(63, 60, WHITE);
+	draw_point2(66, 60, WHITE);
+	draw_point2(67, 60, WHITE);
+	draw_point2(73, 60, WHITE);
+	draw_point2(74, 60, WHITE);
+	draw_point2(75, 60, WHITE);
+	draw_point2(79, 60, WHITE);
+	draw_point2(80, 60, WHITE);
+	draw_point2(84, 60, WHITE);
+	draw_point2(85, 60, WHITE);
+	draw_point2(91, 60, WHITE);
+	draw_point2(92, 60, WHITE);
+	draw_point2(93, 60, WHITE);
+	draw_point2(26, 61, WHITE);
+	draw_point2(29, 61, WHITE);
+	draw_point2(31, 61, WHITE);
+	draw_point2(32, 61, WHITE);
+	draw_point2(36, 61, WHITE);
+	draw_point2(39, 61, WHITE);
+	draw_point2(41, 61, WHITE);
+	draw_point2(46, 61, WHITE);
+	draw_point2(53, 61, WHITE);
+	draw_point2(56, 61, WHITE);
+	draw_point2(62, 61, WHITE);
+	draw_point2(65, 61, WHITE);
+	draw_point2(68, 61, WHITE);
+	draw_point2(73, 61, WHITE);
+	draw_point2(76, 61, WHITE);
+	draw_point2(78, 61, WHITE);
+	draw_point2(81, 61, WHITE);
+	draw_point2(83, 61, WHITE);
+	draw_point2(86, 61, WHITE);
+	draw_point2(89, 61, WHITE);
+	draw_point2(91, 61, WHITE);
+	draw_point2(94, 61, WHITE);
+	draw_point2(18, 62, WHITE);
+	draw_point2(19, 62, WHITE);
+	draw_point2(20, 62, WHITE);
+	draw_point2(21, 62, WHITE);
+	draw_point2(22, 62, WHITE);
+	draw_point2(26, 62, WHITE);
+	draw_point2(29, 62, WHITE);
+	draw_point2(31, 62, WHITE);
+	draw_point2(36, 62, WHITE);
+	draw_point2(37, 62, WHITE);
+	draw_point2(38, 62, WHITE);
+	draw_point2(39, 62, WHITE);
+	draw_point2(42, 62, WHITE);
+	draw_point2(43, 62, WHITE);
+	draw_point2(46, 62, WHITE);
+	draw_point2(47, 62, WHITE);
+	draw_point2(48, 62, WHITE);
+	draw_point2(53, 62, WHITE);
+	draw_point2(54, 62, WHITE);
+	draw_point2(55, 62, WHITE);
+	draw_point2(56, 62, WHITE);
+	draw_point2(62, 62, WHITE);
+	draw_point2(65, 62, WHITE);
+	draw_point2(68, 62, WHITE);
+	draw_point2(73, 62, WHITE);
+	draw_point2(76, 62, WHITE);
+	draw_point2(78, 62, WHITE);
+	draw_point2(79, 62, WHITE);
+	draw_point2(80, 62, WHITE);
+	draw_point2(81, 62, WHITE);
+	draw_point2(83, 62, WHITE);
+	draw_point2(86, 62, WHITE);
+	draw_point2(89, 62, WHITE);
+	draw_point2(91, 62, WHITE);
+	draw_point2(94, 62, WHITE);
+	draw_point2(98, 62, WHITE);
+	draw_point2(99, 62, WHITE);
+	draw_point2(100, 62, WHITE);
+	draw_point2(101, 62, WHITE);
+	draw_point2(102, 62, WHITE);
+	draw_point2(26, 63, WHITE);
+	draw_point2(29, 63, WHITE);
+	draw_point2(31, 63, WHITE);
+	draw_point2(36, 63, WHITE);
+	draw_point2(44, 63, WHITE);
+	draw_point2(49, 63, WHITE);
+	draw_point2(53, 63, WHITE);
+	draw_point2(56, 63, WHITE);
+	draw_point2(62, 63, WHITE);
+	draw_point2(65, 63, WHITE);
+	draw_point2(68, 63, WHITE);
+	draw_point2(73, 63, WHITE);
+	draw_point2(76, 63, WHITE);
+	draw_point2(78, 63, WHITE);
+	draw_point2(83, 63, WHITE);
+	draw_point2(86, 63, WHITE);
+	draw_point2(89, 63, WHITE);
+	draw_point2(91, 63, WHITE);
+	draw_point2(94, 63, WHITE);
+	draw_point2(26, 64, WHITE);
+	draw_point2(27, 64, WHITE);
+	draw_point2(28, 64, WHITE);
+	draw_point2(31, 64, WHITE);
+	draw_point2(37, 64, WHITE);
+	draw_point2(38, 64, WHITE);
+	draw_point2(41, 64, WHITE);
+	draw_point2(42, 64, WHITE);
+	draw_point2(43, 64, WHITE);
+	draw_point2(46, 64, WHITE);
+	draw_point2(47, 64, WHITE);
+	draw_point2(48, 64, WHITE);
+	draw_point2(53, 64, WHITE);
+	draw_point2(56, 64, WHITE);
+	draw_point2(62, 64, WHITE);
+	draw_point2(63, 64, WHITE);
+	draw_point2(66, 64, WHITE);
+	draw_point2(67, 64, WHITE);
+	draw_point2(73, 64, WHITE);
+	draw_point2(74, 64, WHITE);
+	draw_point2(75, 64, WHITE);
+	draw_point2(79, 64, WHITE);
+	draw_point2(80, 64, WHITE);
+	draw_point2(84, 64, WHITE);
+	draw_point2(85, 64, WHITE);
+	draw_point2(86, 64, WHITE);
+	draw_point2(89, 64, WHITE);
+	draw_point2(91, 64, WHITE);
+	draw_point2(94, 64, WHITE);
+	draw_point2(26, 65, WHITE);
+	draw_point2(86, 65, WHITE);
+	draw_point2(26, 66, WHITE);
+	draw_point2(84, 66, WHITE);
+	draw_point2(85, 66, WHITE);
 
 
 }
 
 // draw ending screen
 void draw_ending() {
-	draw_bg(gray);
-	draw_point2(27, 37, white);
-	draw_point2(28, 37, white);
-	draw_point2(29, 37, white);
-	draw_point2(32, 37, white);
-	draw_point2(33, 37, white);
-	draw_point2(34, 37, white);
-	draw_point2(35, 37, white);
-	draw_point2(36, 37, white);
-	draw_point2(39, 37, white);
-	draw_point2(40, 37, white);
-	draw_point2(41, 37, white);
-	draw_point2(45, 37, white);
-	draw_point2(46, 37, white);
-	draw_point2(47, 37, white);
-	draw_point2(50, 37, white);
-	draw_point2(51, 37, white);
-	draw_point2(52, 37, white);
-	draw_point2(53, 37, white);
-	draw_point2(54, 37, white);
-	draw_point2(60, 37, white);
-	draw_point2(61, 37, white);
-	draw_point2(62, 37, white);
-	draw_point2(65, 37, white);
-	draw_point2(71, 37, white);
-	draw_point2(72, 37, white);
-	draw_point2(73, 37, white);
-	draw_point2(74, 37, white);
-	draw_point2(75, 37, white);
-	draw_point2(78, 37, white);
-	draw_point2(79, 37, white);
-	draw_point2(80, 37, white);
-	draw_point2(83, 37, white);
-	draw_point2(84, 37, white);
-	draw_point2(85, 37, white);
-	draw_point2(86, 37, white);
-	draw_point2(90, 37, white);
-	draw_point2(93, 37, white);
-	draw_point2(26, 38, white);
-	draw_point2(30, 38, white);
-	draw_point2(34, 38, white);
-	draw_point2(38, 38, white);
-	draw_point2(42, 38, white);
-	draw_point2(44, 38, white);
-	draw_point2(48, 38, white);
-	draw_point2(50, 38, white);
-	draw_point2(59, 38, white);
-	draw_point2(63, 38, white);
-	draw_point2(65, 38, white);
-	draw_point2(71, 38, white);
-	draw_point2(77, 38, white);
-	draw_point2(81, 38, white);
-	draw_point2(83, 38, white);
-	draw_point2(87, 38, white);
-	draw_point2(90, 38, white);
-	draw_point2(93, 38, white);
-	draw_point2(26, 39, white);
-	draw_point2(34, 39, white);
-	draw_point2(38, 39, white);
-	draw_point2(42, 39, white);
-	draw_point2(44, 39, white);
-	draw_point2(50, 39, white);
-	draw_point2(59, 39, white);
-	draw_point2(65, 39, white);
-	draw_point2(71, 39, white);
-	draw_point2(77, 39, white);
-	draw_point2(81, 39, white);
-	draw_point2(83, 39, white);
-	draw_point2(87, 39, white);
-	draw_point2(90, 39, white);
-	draw_point2(93, 39, white);
-	draw_point2(27, 40, white);
-	draw_point2(28, 40, white);
-	draw_point2(29, 40, white);
-	draw_point2(34, 40, white);
-	draw_point2(38, 40, white);
-	draw_point2(39, 40, white);
-	draw_point2(40, 40, white);
-	draw_point2(41, 40, white);
-	draw_point2(42, 40, white);
-	draw_point2(44, 40, white);
-	draw_point2(46, 40, white);
-	draw_point2(47, 40, white);
-	draw_point2(48, 40, white);
-	draw_point2(50, 40, white);
-	draw_point2(51, 40, white);
-	draw_point2(52, 40, white);
-	draw_point2(53, 40, white);
-	draw_point2(54, 40, white);
-	draw_point2(59, 40, white);
-	draw_point2(65, 40, white);
-	draw_point2(71, 40, white);
-	draw_point2(72, 40, white);
-	draw_point2(73, 40, white);
-	draw_point2(74, 40, white);
-	draw_point2(75, 40, white);
-	draw_point2(77, 40, white);
-	draw_point2(78, 40, white);
-	draw_point2(79, 40, white);
-	draw_point2(80, 40, white);
-	draw_point2(81, 40, white);
-	draw_point2(83, 40, white);
-	draw_point2(84, 40, white);
-	draw_point2(85, 40, white);
-	draw_point2(86, 40, white);
-	draw_point2(90, 40, white);
-	draw_point2(93, 40, white);
-	draw_point2(30, 41, white);
-	draw_point2(34, 41, white);
-	draw_point2(38, 41, white);
-	draw_point2(42, 41, white);
-	draw_point2(44, 41, white);
-	draw_point2(48, 41, white);
-	draw_point2(50, 41, white);
-	draw_point2(59, 41, white);
-	draw_point2(65, 41, white);
-	draw_point2(71, 41, white);
-	draw_point2(77, 41, white);
-	draw_point2(81, 41, white);
-	draw_point2(83, 41, white);
-	draw_point2(86, 41, white);
-	draw_point2(90, 41, white);
-	draw_point2(93, 41, white);
-	draw_point2(26, 42, white);
-	draw_point2(30, 42, white);
-	draw_point2(34, 42, white);
-	draw_point2(38, 42, white);
-	draw_point2(42, 42, white);
-	draw_point2(44, 42, white);
-	draw_point2(48, 42, white);
-	draw_point2(50, 42, white);
-	draw_point2(59, 42, white);
-	draw_point2(63, 42, white);
-	draw_point2(65, 42, white);
-	draw_point2(71, 42, white);
-	draw_point2(77, 42, white);
-	draw_point2(81, 42, white);
-	draw_point2(83, 42, white);
-	draw_point2(87, 42, white);
-	draw_point2(27, 43, white);
-	draw_point2(28, 43, white);
-	draw_point2(29, 43, white);
-	draw_point2(34, 43, white);
-	draw_point2(38, 43, white);
-	draw_point2(42, 43, white);
-	draw_point2(45, 43, white);
-	draw_point2(46, 43, white);
-	draw_point2(47, 43, white);
-	draw_point2(50, 43, white);
-	draw_point2(51, 43, white);
-	draw_point2(52, 43, white);
-	draw_point2(53, 43, white);
-	draw_point2(54, 43, white);
-	draw_point2(60, 43, white);
-	draw_point2(61, 43, white);
-	draw_point2(62, 43, white);
-	draw_point2(65, 43, white);
-	draw_point2(66, 43, white);
-	draw_point2(67, 43, white);
-	draw_point2(68, 43, white);
-	draw_point2(69, 43, white);
-	draw_point2(71, 43, white);
-	draw_point2(72, 43, white);
-	draw_point2(73, 43, white);
-	draw_point2(74, 43, white);
-	draw_point2(75, 43, white);
-	draw_point2(77, 43, white);
-	draw_point2(81, 43, white);
-	draw_point2(83, 43, white);
-	draw_point2(87, 43, white);
-	draw_point2(90, 43, white);
-	draw_point2(93, 43, white);
+	draw_bg(GRAY1);
+	draw_point2(27, 37, WHITE);
+	draw_point2(28, 37, WHITE);
+	draw_point2(29, 37, WHITE);
+	draw_point2(32, 37, WHITE);
+	draw_point2(33, 37, WHITE);
+	draw_point2(34, 37, WHITE);
+	draw_point2(35, 37, WHITE);
+	draw_point2(36, 37, WHITE);
+	draw_point2(39, 37, WHITE);
+	draw_point2(40, 37, WHITE);
+	draw_point2(41, 37, WHITE);
+	draw_point2(45, 37, WHITE);
+	draw_point2(46, 37, WHITE);
+	draw_point2(47, 37, WHITE);
+	draw_point2(50, 37, WHITE);
+	draw_point2(51, 37, WHITE);
+	draw_point2(52, 37, WHITE);
+	draw_point2(53, 37, WHITE);
+	draw_point2(54, 37, WHITE);
+	draw_point2(60, 37, WHITE);
+	draw_point2(61, 37, WHITE);
+	draw_point2(62, 37, WHITE);
+	draw_point2(65, 37, WHITE);
+	draw_point2(71, 37, WHITE);
+	draw_point2(72, 37, WHITE);
+	draw_point2(73, 37, WHITE);
+	draw_point2(74, 37, WHITE);
+	draw_point2(75, 37, WHITE);
+	draw_point2(78, 37, WHITE);
+	draw_point2(79, 37, WHITE);
+	draw_point2(80, 37, WHITE);
+	draw_point2(83, 37, WHITE);
+	draw_point2(84, 37, WHITE);
+	draw_point2(85, 37, WHITE);
+	draw_point2(86, 37, WHITE);
+	draw_point2(90, 37, WHITE);
+	draw_point2(93, 37, WHITE);
+	draw_point2(26, 38, WHITE);
+	draw_point2(30, 38, WHITE);
+	draw_point2(34, 38, WHITE);
+	draw_point2(38, 38, WHITE);
+	draw_point2(42, 38, WHITE);
+	draw_point2(44, 38, WHITE);
+	draw_point2(48, 38, WHITE);
+	draw_point2(50, 38, WHITE);
+	draw_point2(59, 38, WHITE);
+	draw_point2(63, 38, WHITE);
+	draw_point2(65, 38, WHITE);
+	draw_point2(71, 38, WHITE);
+	draw_point2(77, 38, WHITE);
+	draw_point2(81, 38, WHITE);
+	draw_point2(83, 38, WHITE);
+	draw_point2(87, 38, WHITE);
+	draw_point2(90, 38, WHITE);
+	draw_point2(93, 38, WHITE);
+	draw_point2(26, 39, WHITE);
+	draw_point2(34, 39, WHITE);
+	draw_point2(38, 39, WHITE);
+	draw_point2(42, 39, WHITE);
+	draw_point2(44, 39, WHITE);
+	draw_point2(50, 39, WHITE);
+	draw_point2(59, 39, WHITE);
+	draw_point2(65, 39, WHITE);
+	draw_point2(71, 39, WHITE);
+	draw_point2(77, 39, WHITE);
+	draw_point2(81, 39, WHITE);
+	draw_point2(83, 39, WHITE);
+	draw_point2(87, 39, WHITE);
+	draw_point2(90, 39, WHITE);
+	draw_point2(93, 39, WHITE);
+	draw_point2(27, 40, WHITE);
+	draw_point2(28, 40, WHITE);
+	draw_point2(29, 40, WHITE);
+	draw_point2(34, 40, WHITE);
+	draw_point2(38, 40, WHITE);
+	draw_point2(39, 40, WHITE);
+	draw_point2(40, 40, WHITE);
+	draw_point2(41, 40, WHITE);
+	draw_point2(42, 40, WHITE);
+	draw_point2(44, 40, WHITE);
+	draw_point2(46, 40, WHITE);
+	draw_point2(47, 40, WHITE);
+	draw_point2(48, 40, WHITE);
+	draw_point2(50, 40, WHITE);
+	draw_point2(51, 40, WHITE);
+	draw_point2(52, 40, WHITE);
+	draw_point2(53, 40, WHITE);
+	draw_point2(54, 40, WHITE);
+	draw_point2(59, 40, WHITE);
+	draw_point2(65, 40, WHITE);
+	draw_point2(71, 40, WHITE);
+	draw_point2(72, 40, WHITE);
+	draw_point2(73, 40, WHITE);
+	draw_point2(74, 40, WHITE);
+	draw_point2(75, 40, WHITE);
+	draw_point2(77, 40, WHITE);
+	draw_point2(78, 40, WHITE);
+	draw_point2(79, 40, WHITE);
+	draw_point2(80, 40, WHITE);
+	draw_point2(81, 40, WHITE);
+	draw_point2(83, 40, WHITE);
+	draw_point2(84, 40, WHITE);
+	draw_point2(85, 40, WHITE);
+	draw_point2(86, 40, WHITE);
+	draw_point2(90, 40, WHITE);
+	draw_point2(93, 40, WHITE);
+	draw_point2(30, 41, WHITE);
+	draw_point2(34, 41, WHITE);
+	draw_point2(38, 41, WHITE);
+	draw_point2(42, 41, WHITE);
+	draw_point2(44, 41, WHITE);
+	draw_point2(48, 41, WHITE);
+	draw_point2(50, 41, WHITE);
+	draw_point2(59, 41, WHITE);
+	draw_point2(65, 41, WHITE);
+	draw_point2(71, 41, WHITE);
+	draw_point2(77, 41, WHITE);
+	draw_point2(81, 41, WHITE);
+	draw_point2(83, 41, WHITE);
+	draw_point2(86, 41, WHITE);
+	draw_point2(90, 41, WHITE);
+	draw_point2(93, 41, WHITE);
+	draw_point2(26, 42, WHITE);
+	draw_point2(30, 42, WHITE);
+	draw_point2(34, 42, WHITE);
+	draw_point2(38, 42, WHITE);
+	draw_point2(42, 42, WHITE);
+	draw_point2(44, 42, WHITE);
+	draw_point2(48, 42, WHITE);
+	draw_point2(50, 42, WHITE);
+	draw_point2(59, 42, WHITE);
+	draw_point2(63, 42, WHITE);
+	draw_point2(65, 42, WHITE);
+	draw_point2(71, 42, WHITE);
+	draw_point2(77, 42, WHITE);
+	draw_point2(81, 42, WHITE);
+	draw_point2(83, 42, WHITE);
+	draw_point2(87, 42, WHITE);
+	draw_point2(27, 43, WHITE);
+	draw_point2(28, 43, WHITE);
+	draw_point2(29, 43, WHITE);
+	draw_point2(34, 43, WHITE);
+	draw_point2(38, 43, WHITE);
+	draw_point2(42, 43, WHITE);
+	draw_point2(45, 43, WHITE);
+	draw_point2(46, 43, WHITE);
+	draw_point2(47, 43, WHITE);
+	draw_point2(50, 43, WHITE);
+	draw_point2(51, 43, WHITE);
+	draw_point2(52, 43, WHITE);
+	draw_point2(53, 43, WHITE);
+	draw_point2(54, 43, WHITE);
+	draw_point2(60, 43, WHITE);
+	draw_point2(61, 43, WHITE);
+	draw_point2(62, 43, WHITE);
+	draw_point2(65, 43, WHITE);
+	draw_point2(66, 43, WHITE);
+	draw_point2(67, 43, WHITE);
+	draw_point2(68, 43, WHITE);
+	draw_point2(69, 43, WHITE);
+	draw_point2(71, 43, WHITE);
+	draw_point2(72, 43, WHITE);
+	draw_point2(73, 43, WHITE);
+	draw_point2(74, 43, WHITE);
+	draw_point2(75, 43, WHITE);
+	draw_point2(77, 43, WHITE);
+	draw_point2(81, 43, WHITE);
+	draw_point2(83, 43, WHITE);
+	draw_point2(87, 43, WHITE);
+	draw_point2(90, 43, WHITE);
+	draw_point2(93, 43, WHITE);
 }
 
 void sleep(int sleep_time) {
